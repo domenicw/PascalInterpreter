@@ -11,5 +11,10 @@ import Foundation
 enum Token {
     case integer(Int)
     case plus
+    case type(Type)
     case eof
+}
+
+enum Type {
+    case integer
 }

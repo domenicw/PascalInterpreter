@@ -8,5 +8,12 @@
 
 import Foundation
 
-print("Hello, World!")
+let text = readLine()
+
+if let text = text {
+    let interpreter = Interpreter(text)
+    interpreter.interpret()
+} else {
+    fatalError("Error: no input!")
+}
 
