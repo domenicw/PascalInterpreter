@@ -156,7 +156,7 @@ class Interpreter {
      - Post: outputs calculated result
      
     */
-    private func expression() {
+    private func expression() -> Int? {
         self.currentToken = self.nextToken()
         let left = self.currentToken
         self.eat(.type(.integer))
@@ -183,7 +183,7 @@ class Interpreter {
                 }
             }
             
-            print("The result is:", result!)
+            return result
         } else {
             fatalError("Error: input has no end")
         }
@@ -194,8 +194,8 @@ class Interpreter {
     Interprets initialized text
      
     */
-    public func interpret() {
-        self.expression()
+    public func interpret() -> Int? {
+        return self.expression()
     }
  
 }
