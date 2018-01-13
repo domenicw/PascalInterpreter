@@ -36,6 +36,10 @@ extension Operation: Equatable {
             return true
         case (.plus, .plus):
             return true
+        case (.mult, .mult):
+            return true
+        case (.div, .div):
+            return true
         default:
             return false
         }
@@ -73,6 +77,10 @@ extension Operation: CustomStringConvertible {
             return "MINUS"
         case .plus:
             return "PLUS"
+        case .mult:
+            return "MULT"
+        case .div:
+            return "DIV"
         }
     }
 }

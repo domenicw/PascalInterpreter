@@ -35,8 +35,40 @@ class InterpreterTest: XCTestCase {
     func testSubtraction() {
         let subtractions: [String] = ["1-2", "54-23", "65- 43", "    5       -   2 "]
         let results: [Int] = [-1, 31, 22, 3]
-        for index in 0..<additions.count {
-            self.calculateAndCompare(additions[index], result: results[index])
+        for index in 0..<subtractions.count {
+            self.calculateAndCompare(subtractions[index], result: results[index])
+        }
+    }
+    
+    func testAddSub() {
+        let calc: [String] = ["1-2  + 4   - 7 +       23", "54-23-32-1", "65+ 43  + 3 - 7", "    5       -   2 + 893"]
+        let results: [Int] = [19, -2, 104, 896]
+        for index in 0..<calc.count {
+            self.calculateAndCompare(calc[index], result: results[index])
+        }
+    }
+    
+    func testDiv() {
+        let div: [String] = ["2/2", "3/  1", "144 / 12", "   6      /     7"]
+        let results: [Int] = [1, 3, 12, 0]
+        for index in 0..<div.count {
+            self.calculateAndCompare(div[index], result: results[index])
+        }
+    }
+    
+    func testMult() {
+        let mult: [String] = ["1*2", "12*12", "5*    10", "    9       *   8 "]
+        let results: [Int] = [2, 144, 50, 72]
+        for index in 0..<mult.count {
+            self.calculateAndCompare(mult[index], result: results[index])
+        }
+    }
+    
+    func testMultDiv() {
+        let calc: [String] = ["1*2/2", "6/3*8/4", "12 *12/  12", "    6  /     7  *   12"]
+        let results: [Int] = [1, 4, 12, 0]
+        for index in 0..<calc.count {
+            self.calculateAndCompare(calc[index], result: results[index])
         }
     }
 }

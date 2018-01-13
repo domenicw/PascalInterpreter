@@ -12,7 +12,7 @@ let text = readLine()
 
 if let text = text {
     let interpreter = Interpreter(text)
-    print(interpreter.interpret()!)
+    print(interpreter.interpret())
 } else {
     fatalError("Error: no input!")
 }

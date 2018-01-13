@@ -13,7 +13,7 @@ class Interpreter {
     // Input to calculate
     public let text: String
     // Current text position
-    private var position: Int
+    private var charPosition: Int
     // Current character
     private var currentCharacter: Character?
     // Current token
@@ -27,7 +27,7 @@ class Interpreter {
     */
     public init(_ text: String) {
         self.text = text
-        self.position = 0
+        self.charPosition = 0
         self.currentCharacter = text[text.index(text.startIndex, offsetBy: 0)]
     }
     
@@ -80,12 +80,22 @@ class Interpreter {
                 return Token.operation(.minus)
             }
             
+            if currentCharacter == "*" {
+                self.advance()
+                return Token.operation(.mult)
+            }
+            
+            if currentCharacter == "/" {
+                self.advance()
+                return Token.operation(.div)
+            }
+            
             if let _ = Int("\(currentCharacter)") {
                 let integer = self.integer()
                 return Token.integer(integer)
             }
             
-            fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.position)")
+            fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.charPosition)")
         }
         
         return Token.eof
@@ -100,7 +110,7 @@ class Interpreter {
      
     */
     private func peek() -> Character? {
-        let peekPosition = self.position + 1
+        let peekPosition = self.charPosition + 1
         
         guard peekPosition < self.text.count else { return nil }
         return self.text[self.text.index(self.text.startIndex, offsetBy: peekPosition)]
@@ -111,12 +121,12 @@ class Interpreter {
      
     */
     private func advance() {
-        self.position += 1
-        guard self.position < self.text.count else {
+        self.charPosition += 1
+        guard self.charPosition < self.text.count else {
             self.currentCharacter = nil
             return
         }
-        self.currentCharacter = self.text[self.text.index(self.text.startIndex, offsetBy: self.position)]
+        self.currentCharacter = self.text[self.text.index(self.text.startIndex, offsetBy: self.charPosition)]
     }
     
     /**
@@ -151,50 +161,57 @@ class Interpreter {
     }
     
     /**
+    Reads and returns the value of the current integer
+     
+    - Returns: Current Integer
+     
+    */
+    private func term() -> Int {
+        guard let currentToken = currentToken else {
+            fatalError("Error: Current token is not set")
+        }
+        self.eat(.type(.integer))
+        return evaluate(currentToken)
+    }
+    
+    /**
     Expresses the input text
      
      - Post: outputs calculated result
      
     */
-    private func expression() -> Int? {
+    private func expression() -> Int {
         self.currentToken = self.nextToken()
-        let left = self.currentToken
-        self.eat(.type(.integer))
         
-        let operation = self.currentToken
-        if case .operation(let op) = operation! {
-            if op == .minus {
+        let operations: [Token] = [.operation(.minus), .operation(.plus), .operation(.mult), .operation(.div)]
+        var result = self.term()
+        
+        while let currentToken = self.currentToken, operations.contains(currentToken) {
+            switch currentToken {
+            case .operation(.minus):
                 self.eat(.operation(.minus))
-            } else {
+                result -= self.term()
+            case .operation(.plus):
                 self.eat(.operation(.plus))
+                result += self.term()
+            case .operation(.mult):
+                self.eat(.operation(.mult))
+                result *= self.term()
+            case .operation(.div):
+                self.eat(.operation(.div))
+                result /= self.term()
+            default:
+                fatalError("Error: this error should never throw. Something went seriously wrong!")
             }
         }
-        
-        let right = self.currentToken
-        self.eat(.type(.integer))
-        
-        if self.currentToken == .eof {
-            var result: Int?
-            if case .operation(let op) = operation! {
-                if op == .minus {
-                    result = self.evaluate(left!) - self.evaluate(right!)
-                } else {
-                    result = self.evaluate(left!) + self.evaluate(right!)
-                }
-            }
-            
-            return result
-        } else {
-            fatalError("Error: input has no end")
-        }
-        
+        return result
     }
     
     /**
     Interprets initialized text
      
     */
-    public func interpret() -> Int? {
+    public func interpret() -> Int {
         return self.expression()
     }
  

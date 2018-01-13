@@ -22,4 +22,6 @@ enum Type {
 enum Operation {
     case minus
     case plus
+    case mult
+    case div
 }
