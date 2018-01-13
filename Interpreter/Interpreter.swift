@@ -14,9 +14,9 @@ class Interpreter {
     public let text: String
     // Current text position
     private var position: Int
-    // Current token
+    // Current character
     private var currentCharacter: Character?
-    
+    // Current token
     private var currentToken: Token?
     
     /**
@@ -32,32 +32,63 @@ class Interpreter {
     }
     
     /**
+    Skips white spaces of input text
+     
+    */
+    private func skipWhiteSpace() {
+        while self.currentCharacter == " " {
+            self.advance()
+        }
+    }
+    
+    /**
+    Combines multiple characters to multi digit integers
+     
+    - Returns: input integer
+     
+    */
+    private func integer() -> Int {
+        var number: Int = 0
+        while let currentCharacter = self.currentCharacter, let currentNumber = Int("\(currentCharacter)") {
+            number = number * 10 + currentNumber
+            self.advance()
+        }
+        return number
+    }
+    
+    /**
     Takes the current character and assigns it to its designated Token
      
     - Returns: Token for the current character
      
     */
     private func nextToken() -> Token {
-        guard self.text.count > self.position else {
-            return Token.eof
+        while let currentCharacter = self.currentCharacter {
+            
+            if currentCharacter == " " {
+                self.skipWhiteSpace()
+                continue
+            }
+            
+            if currentCharacter == "+" {
+                self.advance()
+                return Token.operation(.plus)
+            }
+            
+            if currentCharacter == "-" {
+                self.advance()
+                return Token.operation(.minus)
+            }
+            
+            if let _ = Int("\(currentCharacter)") {
+                let integer = self.integer()
+                return Token.integer(integer)
+            }
+            
+            fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.position)")
         }
         
-        if self.currentCharacter == "+" {
-            self.advance()
-            return Token.operation(.plus)
-        }
-        
-        if self.currentCharacter == "-" {
-            self.advance()
-            return Token.operation(.minus)
-        }
-        
-        if let number = Int("\(self.currentCharacter!)") {
-            self.advance()
-            return Token.integer(number)
-        }
-        
-        fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.position)")
+        return Token.eof
     }
     
     /**
