@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		B0D95D33200A4529001C46D0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D32200A4529001C46D0 /* main.swift */; };
+		B0D95D3F200A4902001C46D0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
+		B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
+		B0D95D43200A4C6F001C46D0 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D42200A4C6F001C46D0 /* Interpreter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +28,10 @@
 /* Begin PBXFileReference section */
 		B0D95D2F200A4529001C46D0 /* Calculator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Calculator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D95D32200A4529001C46D0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		B0D95D3C200A46B4001C46D0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B0D95D3E200A4902001C46D0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
+		B0D95D40200A4924001C46D0 /* Token+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Token+Extensions.swift"; sourceTree = "<group>"; };
+		B0D95D42200A4C6F001C46D0 /* Interpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpreter.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +48,11 @@
 		B0D95D26200A4529001C46D0 = {
 			isa = PBXGroup;
 			children = (
+				B0D95D3D200A48E3001C46D0 /* Token */,
+				B0D95D3C200A46B4001C46D0 /* README.md */,
+				B0D95D3B200A469E001C46D0 /* Interpreter */,
+				B0D95D3A200A4695001C46D0 /* Lexer */,
+				B0D95D39200A4689001C46D0 /* Parser */,
 				B0D95D31200A4529001C46D0 /* Calculator */,
 				B0D95D30200A4529001C46D0 /* Products */,
 			);
@@ -60,6 +72,37 @@
 				B0D95D32200A4529001C46D0 /* main.swift */,
 			);
 			path = Calculator;
+			sourceTree = "<group>";
+		};
+		B0D95D39200A4689001C46D0 /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+		B0D95D3A200A4695001C46D0 /* Lexer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Lexer;
+			sourceTree = "<group>";
+		};
+		B0D95D3B200A469E001C46D0 /* Interpreter */ = {
+			isa = PBXGroup;
+			children = (
+				B0D95D42200A4C6F001C46D0 /* Interpreter.swift */,
+			);
+			path = Interpreter;
+			sourceTree = "<group>";
+		};
+		B0D95D3D200A48E3001C46D0 /* Token */ = {
+			isa = PBXGroup;
+			children = (
+				B0D95D3E200A4902001C46D0 /* Token.swift */,
+				B0D95D40200A4924001C46D0 /* Token+Extensions.swift */,
+			);
+			path = Token;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -120,7 +163,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0D95D43200A4C6F001C46D0 /* Interpreter.swift in Sources */,
+				B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */,
 				B0D95D33200A4529001C46D0 /* main.swift in Sources */,
+				B0D95D3F200A4902001C46D0 /* Token.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
