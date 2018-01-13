@@ -11,8 +11,8 @@ import Foundation
 extension Token: Equatable {
     static public func ==(lhs: Token, rhs: Token) -> Bool {
         switch (lhs, rhs) {
-        case (.plus, .plus):
-            return true
+        case (.operation(let left), .operation(let right)):
+            return left == right
         case (.eof, .eof):
             return true
         case (.integer(let left), .integer(let right)):
@@ -29,13 +29,26 @@ extension Token: Equatable {
     }
 }
 
+extension Operation: Equatable {
+    static public func ==(lhs: Operation, rhs: Operation) -> Bool {
+        switch (lhs, rhs) {
+        case (.minus, .minus):
+            return true
+        case (.plus, .plus):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 extension Token: CustomStringConvertible {
     var description: String {
         switch self {
         case .integer:
             return "INTEGER"
-        case .plus:
-            return "PLUS"
+        case .operation(let val):
+            return "OPERATION \(val)"
         case .type(let val):
             return "TYPE \(val)"
         case .eof:
@@ -49,6 +62,17 @@ extension Type: CustomStringConvertible {
         switch self {
         case .integer:
             return "INTEGER"
+        }
+    }
+}
+
+extension Operation: CustomStringConvertible {
+    var description: String {
+        switch self {
+        case .minus:
+            return "MINUS"
+        case .plus:
+            return "PLUS"
         }
     }
 }

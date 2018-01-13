@@ -44,7 +44,12 @@ class Interpreter {
         
         if self.currentCharacter == "+" {
             self.advance()
-            return Token.plus
+            return Token.operation(.plus)
+        }
+        
+        if self.currentCharacter == "-" {
+            self.advance()
+            return Token.operation(.minus)
         }
         
         if let number = Int("\(self.currentCharacter!)") {
@@ -93,7 +98,7 @@ class Interpreter {
         if self.currentToken! == token {
             self.currentToken = self.nextToken()
         } else {
-            fatalError("Error: eating token: \(token) \(currentToken!)")
+            fatalError("Error: eating token: \(token), with current token: \(currentToken!)")
         }
     }
     
@@ -125,16 +130,29 @@ class Interpreter {
         let left = self.currentToken
         self.eat(.type(.integer))
         
-        let plus = self.currentToken
-        self.eat(.plus)
+        let operation = self.currentToken
+        if case .operation(let op) = operation! {
+            if op == .minus {
+                self.eat(.operation(.minus))
+            } else {
+                self.eat(.operation(.plus))
+            }
+        }
         
         let right = self.currentToken
         self.eat(.type(.integer))
         
         if self.currentToken == .eof {
-            let result = self.evaluate(left!) + self.evaluate(right!)
+            var result: Int?
+            if case .operation(let op) = operation! {
+                if op == .minus {
+                    result = self.evaluate(left!) - self.evaluate(right!)
+                } else {
+                    result = self.evaluate(left!) + self.evaluate(right!)
+                }
+            }
             
-            print(result)
+            print("The result is:", result!)
         } else {
             fatalError("Error: input has no end")
         }
