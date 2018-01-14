@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0030CA3200B801000F63A60 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF5C200B70E400487609 /* Parser.swift */; };
+		B0030CA4200B801300F63A60 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF5E200B714A00487609 /* AST.swift */; };
+		B0030CA5200B801500F63A60 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF60200B716E00487609 /* Number.swift */; };
+		B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF62200B72BB00487609 /* BinaryOperation.swift */; };
 		B03D1811200AB14B000C1951 /* InterpreterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D1810200AB14B000C1951 /* InterpreterTest.swift */; };
 		B03D1818200AB7DA000C1951 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
@@ -236,10 +240,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B0030CA5200B801500F63A60 /* Number.swift in Sources */,
 				B03D181A200AB7DF000C1951 /* Interpreter.swift in Sources */,
+				B0030CA4200B801300F63A60 /* AST.swift in Sources */,
 				B03D1811200AB14B000C1951 /* InterpreterTest.swift in Sources */,
+				B0030CA3200B801000F63A60 /* Parser.swift in Sources */,
 				B03D1818200AB7DA000C1951 /* Token.swift in Sources */,
 				B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */,
+				B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */,
 				B061FF5B200B555C00487609 /* Lexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -13,6 +13,7 @@ public class Number: AST {
     // Number of integer token
     private let token: Token
     
+    // Value of integer token
     public var value: Int {
         get {
             if case .integer(let val) = self.token {
@@ -22,6 +23,7 @@ public class Number: AST {
         }
     }
     
+    // Initializer
     public init(_ token: Token) {
         self.token = token
     }

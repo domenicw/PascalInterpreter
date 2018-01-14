@@ -10,9 +10,8 @@ import Foundation
 
 class Interpreter {
     
-    private let lexer: Lexer
-    // Current token
-    private var currentToken: Token
+    // Parser
+    private let parser: Parser
     
     /**
     Initializer for Interpreter class
@@ -21,119 +20,77 @@ class Interpreter {
      
     */
     public init(_ text: String) {
-        self.lexer = Lexer(text)
-        self.currentToken = self.lexer.nextToken()
+        self.parser = Parser(text)
     }
     
     /**
-    Eats the current character
+     Evaluated an AST
      
-    - Parameter token: Type of Token that should be eaten
+     - Parameter node: a complete tree or a part of it to evaluate
      
-    */
-    private func eat(_ token: Token) {
-        if self.currentToken == token {
-            self.currentToken = self.lexer.nextToken()
-        } else {
-            fatalError("Error: eating token: \(token), with current token: \(currentToken)")
-        }
-    }
-    
-    /**
-    Evaluates the input and returns it's value
+     - Returns: Computed value of tree
      
-    - Parameter token: Token to be evaluated
-     
-    - Returns: Value of Token
-     
-    */
-    private func evaluate(_ token: Token) -> Int {
-        switch token {
-        case .integer(let val):
-            return val
+     */
+    private func eval(_ node: AST) -> Int {
+        switch node {
+        case let operation as BinaryOperation:
+            return self.eval(operation)
+        case let number as Number:
+            return self.eval(number)
         default:
-            fatalError("Error evaluating expression")
+            fatalError("Error: unknows node type: \(node)")
         }
     }
     
     /**
-    Reads and returns the value of the current integer
+     Evaluated Number nodes
      
-     - Note: factor: INTEGER | "(" exp ")"
-    
-    - Returns: Current Integer
+     - Parameter number: Number node to evaluate
      
-    */
-    private func factor() -> Int {
-        if self.currentToken == .parenthesis(.open) {
-            self.eat(.parenthesis(.open))
-            let result = self.expression()
-            self.eat(.parenthesis(.close))
-            return result
-        } else if self.currentToken == .operation(.minus) {
-            self.eat(.operation(.minus))
-            return -self.factor()
-        } else {
-            let token = self.currentToken
-            self.eat(.type(.integer))
-            return evaluate(token)
-        }
+     - Returns: Integer value of Number node
+     
+     */
+    private func eval(_ number: Number) -> Int {
+        return number.value
     }
     
     /**
-    Calculates terms
+     Evaluates BinaryOperation nodes
      
-     - Note: term: factor ((MULT | DIV) factor)*
+     - Parameter operation: A node to evaluate
      
-    - Returns: Result of terms
+     - Returns: Integer of operation
      
-    */
-    private func term() -> Int {
-        let operations: [Token] = [.operation(.mult), .operation(.div)]
-        
-        var result = self.factor()
-        while operations.contains(self.currentToken) {
-            if self.currentToken == .operation(.mult) {
-                self.eat(.operation(.mult))
-                result *= self.factor()
-            } else if self.currentToken == .operation(.div) {
-                self.eat(.operation(.div))
-                result /= self.factor()
+     */
+    private func eval(_ operation: BinaryOperation) -> Int {
+        guard let right = operation.right else {
+            if operation.token == .operation(.minus) {
+                return -eval(operation.left)
             }
+            fatalError("Error: operation \(operation.token) not recognized")
         }
-        return result
+        switch operation.token {
+        case .operation(.minus):
+            return eval(operation.left) - eval(right)
+        case .operation(.plus):
+            return eval(operation.left) + eval(right)
+        case .operation(.mult):
+            return eval(operation.left) * eval(right)
+        case .operation(.div):
+            return eval(operation.left) / eval(right)
+        default:
+            fatalError("Error: unknow binary operation type \(operation.token)")
+        }
     }
     
-    /**
-    Calculates expressions
-     
-     - Note: exp: term ((PLUS | MINUS) term)*
-     
-     - Returns: Result of expressions
-     
-    */
-    private func expression() -> Int {
-        let operations: [Token] = [.operation(.minus), .operation(.plus)]
-        
-        var result = self.term()
-        while operations.contains(self.currentToken) {
-            if self.currentToken == .operation(.minus) {
-                self.eat(.operation(.minus))
-                result -= self.term()
-            } else if self.currentToken == .operation(.plus) {
-                self.eat(.operation(.plus))
-                result += self.term()
-            }
-        }
-        return result
-    }
     
     /**
     Interprets initialized text
      
     */
     public func interpret() -> Int {
-        return self.expression()
+        let tree = self.parser.parse()
+        return self.eval(tree)
     }
  
 }

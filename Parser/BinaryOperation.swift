@@ -10,11 +10,15 @@ import Foundation
 
 public class BinaryOperation: AST {
     
+    // Token (operation)
     public let token: Token
+    // Left node of tree
     public let left: AST
-    public let right: AST
+    // Right node of tree
+    public let right: AST?
     
-    public init(_ token: Token, left: AST, right: AST) {
+    // Initializer
+    public init(_ token: Token, left: AST, right: AST?) {
         self.token = token
         self.left = left
         self.right = right

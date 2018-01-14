@@ -41,23 +41,6 @@ public class Parser {
     }
     
     /**
-     Evaluates the input and returns it's value
-     
-     - Parameter token: Token to be evaluated
-     
-     - Returns: Value of Token
-     
-     */
-    private func evaluate(_ token: Token) -> Int {
-        switch token {
-        case .integer(let val):
-            return val
-        default:
-            fatalError("Error evaluating expression")
-        }
-    }
-    
-    /**
      Reads and returns the value of the current integer
      
      - Note: factor: INTEGER | "(" exp ")"
@@ -65,7 +48,7 @@ public class Parser {
      - Returns: Current Integer
      
      */
-    private func factor() -> Int {
+    private func factor() -> AST {
         if self.currentToken == .parenthesis(.open) {
             self.eat(.parenthesis(.open))
             let result = self.expression()
@@ -73,11 +56,11 @@ public class Parser {
             return result
         } else if self.currentToken == .operation(.minus) {
             self.eat(.operation(.minus))
-            return -self.factor()
+            return BinaryOperation(Token.operation(.minus), left: self.factor(), right: nil)
         } else {
             let token = self.currentToken
             self.eat(.type(.integer))
-            return evaluate(token)
+            return Number(token)
         }
     }
     
@@ -89,20 +72,20 @@ public class Parser {
      - Returns: Result of terms
      
      */
-    private func term() -> Int {
+    private func term() -> AST {
         let operations: [Token] = [.operation(.mult), .operation(.div)]
         
-        var result = self.factor()
+        var node = self.factor()
         while operations.contains(self.currentToken) {
-            if self.currentToken == .operation(.mult) {
+            let token = self.currentToken
+            if token == .operation(.mult) {
                 self.eat(.operation(.mult))
-                result *= self.factor()
-            } else if self.currentToken == .operation(.div) {
+            } else if token == .operation(.div) {
                 self.eat(.operation(.div))
-                result /= self.factor()
             }
+            node = BinaryOperation(token, left: node, right: self.factor())
         }
-        return result
+        return node
     }
     
     /**
@@ -113,27 +96,28 @@ public class Parser {
      - Returns: Result of expressions
      
      */
-    private func expression() -> Int {
+    private func expression() -> AST {
         let operations: [Token] = [.operation(.minus), .operation(.plus)]
         
-        var result = self.term()
+        var node = self.term()
         while operations.contains(self.currentToken) {
-            if self.currentToken == .operation(.minus) {
+            let token = self.currentToken
+            if token == .operation(.minus) {
                 self.eat(.operation(.minus))
-                result -= self.term()
-            } else if self.currentToken == .operation(.plus) {
+            } else if token == .operation(.plus) {
                 self.eat(.operation(.plus))
-                result += self.term()
             }
+            node = BinaryOperation(token, left: node, right: self.term())
         }
-        return result
+        return node
     }
     
     /**
-     Interprets initialized text
+     Parses initialized text
      
+     - Returns: AST of parsed text
      */
-    public func parse() -> Int {
+    public func parse() -> AST {
         return self.expression()
     }
 }
