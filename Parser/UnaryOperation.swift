@@ -1,5 +1,5 @@
 //
-//  BinaryOperation.swift
+//  UnaryOperation.swift
 //  Calculator
 //
 //  Created by Domenic Wüthrich on 14.01.18.
@@ -8,20 +8,16 @@
 
 import Foundation
 
-public class BinaryOperation: AST {
+public class UnaryOperation: AST {
     
     // Token (operation)
     public let token: Token
-    // Left node of tree
+    // Next node
     public let left: AST
-    // Right node of tree
-    public let right: AST
     
     // Initializer
-    public init(_ token: Token, left: AST, right: AST) {
+    public init(_ token: Token, left: AST) {
         self.token = token
         self.left = left
-        self.right = right
     }
-    
 }

@@ -13,6 +13,8 @@
 		B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF62200B72BB00487609 /* BinaryOperation.swift */; };
 		B0030CA8200B96DC00F63A60 /* RPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CA7200B96DC00F63A60 /* RPN.swift */; };
 		B0030CA9200B9A9000F63A60 /* RPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CA7200B96DC00F63A60 /* RPN.swift */; };
+		B0030CAB200B9E5800F63A60 /* UnaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */; };
+		B0030CAC200BA08600F63A60 /* UnaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */; };
 		B03D1811200AB14B000C1951 /* InterpreterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D1810200AB14B000C1951 /* InterpreterTest.swift */; };
 		B03D1818200AB7DA000C1951 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
@@ -43,6 +45,7 @@
 
 /* Begin PBXFileReference section */
 		B0030CA7200B96DC00F63A60 /* RPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPN.swift; sourceTree = "<group>"; };
+		B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnaryOperation.swift; sourceTree = "<group>"; };
 		B03D180E200AB14B000C1951 /* CalculatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03D1810200AB14B000C1951 /* InterpreterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpreterTest.swift; sourceTree = "<group>"; };
 		B03D1812200AB14B000C1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -124,6 +127,7 @@
 				B061FF5E200B714A00487609 /* AST.swift */,
 				B061FF60200B716E00487609 /* Number.swift */,
 				B061FF62200B72BB00487609 /* BinaryOperation.swift */,
+				B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -249,6 +253,7 @@
 				B0030CA4200B801300F63A60 /* AST.swift in Sources */,
 				B03D1811200AB14B000C1951 /* InterpreterTest.swift in Sources */,
 				B0030CA3200B801000F63A60 /* Parser.swift in Sources */,
+				B0030CAC200BA08600F63A60 /* UnaryOperation.swift in Sources */,
 				B03D1818200AB7DA000C1951 /* Token.swift in Sources */,
 				B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */,
 				B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */,
@@ -266,6 +271,7 @@
 				B061FF5F200B714A00487609 /* AST.swift in Sources */,
 				B061FF5D200B70E400487609 /* Parser.swift in Sources */,
 				B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */,
+				B0030CAB200B9E5800F63A60 /* UnaryOperation.swift in Sources */,
 				B0D95D33200A4529001C46D0 /* main.swift in Sources */,
 				B0D95D3F200A4902001C46D0 /* Token.swift in Sources */,
 				B061FF63200B72BB00487609 /* BinaryOperation.swift in Sources */,

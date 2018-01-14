@@ -43,7 +43,7 @@ public class Parser {
     /**
      Reads and returns the value of the current integer
      
-     - Note: factor: INTEGER | "(" exp ")"
+     - Note: factor: [ + | - ] INTEGER | [ + | - ] "(" exp ")"
      
      - Returns: Current Integer
      
@@ -56,7 +56,10 @@ public class Parser {
             return result
         } else if self.currentToken == .operation(.minus) {
             self.eat(.operation(.minus))
-            return BinaryOperation(Token.operation(.minus), left: self.factor(), right: nil)
+            return UnaryOperation(Token.operation(.minus), left: self.factor())
+        } else if self.currentToken == .operation(.plus) {
+            self.eat(.operation(.plus))
+            return UnaryOperation(Token.operation(.plus), left: self.factor())
         } else {
             let token = self.currentToken
             if case .type(.integer) = token {

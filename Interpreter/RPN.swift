@@ -32,6 +32,8 @@ public class RPN {
             return self.eval(operation)
         case let number as Number:
             return self.eval(number)
+        case let unary as UnaryOperation:
+            return self.eval(unary)
         default:
             fatalError("Error: unknows node type: \(node)")
         }
@@ -58,23 +60,36 @@ public class RPN {
      
      */
     private func eval(_ operation: BinaryOperation) -> String {
-        guard let right = operation.right else {
-            if operation.token == .operation(.minus) {
-                return "\(eval(operation.left)) - "
-            }
-            fatalError("Error: operation \(operation.token) not recognized")
-        }
         switch operation.token {
         case .operation(.minus):
-            return "\(eval(operation.left)) \(eval(right)) - "
+            return "\(eval(operation.left)) \(eval(operation.right)) - "
         case .operation(.plus):
-            return "\(eval(operation.left)) \(eval(right)) + "
+            return "\(eval(operation.left)) \(eval(operation.right)) + "
         case .operation(.mult):
-            return "\(eval(operation.left)) \(eval(right)) * "
+            return "\(eval(operation.left)) \(eval(operation.right)) * "
         case .operation(.div):
-            return "\(eval(operation.left)) \(eval(right)) / "
+            return "\(eval(operation.left)) \(eval(operation.right)) / "
         default:
             fatalError("Error: unknow binary operation type \(operation.token)")
+        }
+    }
+    
+    /**
+     Evaluates an UnaryOperation node
+     
+     - Parameter unary: A node to evaluate
+     
+     - Returns: Evaluated UnaryOperation node
+     
+     */
+    private func eval(_ unary: UnaryOperation) -> String {
+        switch unary.token {
+        case .operation(.minus):
+            return "\(eval(unary.left)) - "
+        case .operation(.plus):
+            return "\(eval(unary.left)) "
+        default:
+            fatalError("Error: unknown unary operation type \(unary.token)")
         }
     }
     

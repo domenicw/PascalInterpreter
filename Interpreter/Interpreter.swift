@@ -37,6 +37,8 @@ class Interpreter {
             return self.eval(operation)
         case let number as Number:
             return self.eval(number)
+        case let unary as UnaryOperation:
+            return self.eval(unary)
         default:
             fatalError("Error: unknows node type: \(node)")
         }
@@ -63,23 +65,36 @@ class Interpreter {
      
      */
     private func eval(_ operation: BinaryOperation) -> Int {
-        guard let right = operation.right else {
-            if operation.token == .operation(.minus) {
-                return -eval(operation.left)
-            }
-            fatalError("Error: operation \(operation.token) not recognized")
-        }
         switch operation.token {
         case .operation(.minus):
-            return eval(operation.left) - eval(right)
+            return eval(operation.left) - eval(operation.right)
         case .operation(.plus):
-            return eval(operation.left) + eval(right)
+            return eval(operation.left) + eval(operation.right)
         case .operation(.mult):
-            return eval(operation.left) * eval(right)
+            return eval(operation.left) * eval(operation.right)
         case .operation(.div):
-            return eval(operation.left) / eval(right)
+            return eval(operation.left) / eval(operation.right)
         default:
             fatalError("Error: unknow binary operation type \(operation.token)")
+        }
+    }
+    
+    /**
+     Evaluates UnaryOperation nodes
+     
+     - Parameter unary: A node to evaluate
+     
+     - Returns: Integer of operation
+     
+     */
+    private func eval(_ unary: UnaryOperation) -> Int {
+        switch unary.token {
+        case .operation(.minus):
+            return -eval(unary.left)
+        case .operation(.plus):
+            return eval(unary.left)
+        default:
+            fatalError("Error: unknown unary operation type \(unary.token)")
         }
     }
     
