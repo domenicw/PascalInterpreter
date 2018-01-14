@@ -11,6 +11,7 @@
 		B03D1818200AB7DA000C1951 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
 		B03D181A200AB7DF000C1951 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D42200A4C6F001C46D0 /* Interpreter.swift */; };
+		B03D181D200B4CCC000C1951 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D181C200B4CCC000C1951 /* Lexer.swift */; };
 		B0D95D33200A4529001C46D0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D32200A4529001C46D0 /* main.swift */; };
 		B0D95D3F200A4902001C46D0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
@@ -33,6 +34,7 @@
 		B03D180E200AB14B000C1951 /* CalculatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03D1810200AB14B000C1951 /* InterpreterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpreterTest.swift; sourceTree = "<group>"; };
 		B03D1812200AB14B000C1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B03D181C200B4CCC000C1951 /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
 		B0D95D2F200A4529001C46D0 /* Calculator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Calculator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D95D32200A4529001C46D0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B0D95D3C200A46B4001C46D0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 		B0D95D3A200A4695001C46D0 /* Lexer */ = {
 			isa = PBXGroup;
 			children = (
+				B03D181C200B4CCC000C1951 /* Lexer.swift */,
 			);
 			path = Lexer;
 			sourceTree = "<group>";
@@ -235,6 +238,7 @@
 				B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */,
 				B0D95D33200A4529001C46D0 /* main.swift in Sources */,
 				B0D95D3F200A4902001C46D0 /* Token.swift in Sources */,
+				B03D181D200B4CCC000C1951 /* Lexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
