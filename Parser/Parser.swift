@@ -59,8 +59,11 @@ public class Parser {
             return BinaryOperation(Token.operation(.minus), left: self.factor(), right: nil)
         } else {
             let token = self.currentToken
-            self.eat(.type(.integer))
-            return Number(token)
+            if case .type(.integer) = token {
+                self.eat(token)
+                return Number(token)
+            }
+            fatalError("Error: token: \(token) is not a number")
         }
     }
     

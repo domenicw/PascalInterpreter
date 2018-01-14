@@ -15,14 +15,8 @@ extension Token: Equatable {
             return left == right
         case (.eof, .eof):
             return true
-        case (.integer(let left), .integer(let right)):
-            return left == right
         case (.type(let left), .type(let right)):
             return left == right
-        case (.type(let val), .integer):
-            return val == Type.integer
-        case (.integer, .type(let val)):
-            return val == Type.integer
         case (.parenthesis(let left), .parenthesis(let right)):
             return left == right
         default:
@@ -61,11 +55,18 @@ extension Parenthesis: Equatable {
     }
 }
 
+extension Type: Equatable {
+    static public func ==(lhs: Type, rhs: Type) -> Bool {
+        switch (lhs, rhs) {
+        case (.integer(let left), .integer(let right)):
+            return left == right
+        }
+    }
+}
+
 extension Token: CustomStringConvertible {
     public var description: String {
         switch self {
-        case .integer:
-            return "INTEGER"
         case .operation(let val):
             return "OPERATION \(val)"
         case .type(let val):

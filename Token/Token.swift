@@ -9,7 +9,6 @@
 import Foundation
 
 public enum Token {
-    case integer(Int)
     case operation(Operation)
     case type(Type)
     case parenthesis(Parenthesis)
@@ -17,7 +16,7 @@ public enum Token {
 }
 
 public enum Type {
-    case integer
+    case integer(Int)
 }
 
 public enum Operation {

@@ -16,7 +16,7 @@ public class Number: AST {
     // Value of integer token
     public var value: Int {
         get {
-            if case .integer(let val) = self.token {
+            if case .type(.integer(let val)) = self.token {
                 return val
             }
             fatalError("Error: token: \(self.token) is not a number")

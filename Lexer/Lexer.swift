@@ -128,7 +128,7 @@ class Lexer {
             
             if let _ = Int("\(currentCharacter)") {
                 let integer = self.integer()
-                return Token.integer(integer)
+                return Token.type(.integer(integer))
             }
             
             fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.charPosition)")
