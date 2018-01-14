@@ -73,36 +73,12 @@ class Interpreter {
     /**
     Calculates terms
      
-     - Note: term: exp ((PLUS | MINUS) exp)*
+     - Note: term: factor ((MULT | DIV) factor)*
      
     - Returns: Result of terms
      
     */
     private func term() -> Int {
-        let operations: [Token] = [.operation(.minus), .operation(.plus)]
-        var result = self.expression()
-        
-        while operations.contains(self.currentToken) {
-            if self.currentToken == .operation(.minus) {
-                self.eat(.operation(.minus))
-                result -= self.expression()
-            } else if self.currentToken == .operation(.plus) {
-                self.eat(.operation(.plus))
-                result += self.expression()
-            }
-        }
-        return result
-    }
-    
-    /**
-    Calculates expressions
-     
-     - Note: exp: factor ((MULT | DIV) factor)*
-     
-     - Returns: Result of expressions
-     
-    */
-    private func expression() -> Int {
         let operations: [Token] = [.operation(.mult), .operation(.div)]
         var result = self.factor()
         
@@ -119,11 +95,35 @@ class Interpreter {
     }
     
     /**
+    Calculates expressions
+     
+     - Note: exp: term ((PLUS | MINUS) term)*
+     
+     - Returns: Result of expressions
+     
+    */
+    private func expression() -> Int {
+        let operations: [Token] = [.operation(.minus), .operation(.plus)]
+        var result = self.term()
+        
+        while operations.contains(self.currentToken) {
+            if self.currentToken == .operation(.minus) {
+                self.eat(.operation(.minus))
+                result -= self.term()
+            } else if self.currentToken == .operation(.plus) {
+                self.eat(.operation(.plus))
+                result += self.term()
+            }
+        }
+        return result
+    }
+    
+    /**
     Interprets initialized text
      
     */
     public func interpret() -> Int {
-        return self.term()
+        return self.expression()
     }
  
 }
