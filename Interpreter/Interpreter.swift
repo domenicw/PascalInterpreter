@@ -59,15 +59,22 @@ class Interpreter {
     /**
     Reads and returns the value of the current integer
      
-     - Note: factor: INTEGER
+     - Note: factor: INTEGER | "(" exp ")"
     
     - Returns: Current Integer
      
     */
     private func factor() -> Int {
-        let token = self.currentToken
-        self.eat(.type(.integer))
-        return evaluate(token)
+        if self.currentToken == .parenthesis(.open) {
+            self.eat(.parenthesis(.open))
+            let result = self.expression()
+            self.eat(.parenthesis(.close))
+            return result
+        } else {
+            let token = self.currentToken
+            self.eat(.type(.integer))
+            return evaluate(token)
+        }
     }
     
     /**
@@ -80,8 +87,8 @@ class Interpreter {
     */
     private func term() -> Int {
         let operations: [Token] = [.operation(.mult), .operation(.div)]
-        var result = self.factor()
         
+        var result = self.factor()
         while operations.contains(self.currentToken) {
             if self.currentToken == .operation(.mult) {
                 self.eat(.operation(.mult))
@@ -104,8 +111,8 @@ class Interpreter {
     */
     private func expression() -> Int {
         let operations: [Token] = [.operation(.minus), .operation(.plus)]
-        var result = self.term()
         
+        var result = self.term()
         while operations.contains(self.currentToken) {
             if self.currentToken == .operation(.minus) {
                 self.eat(.operation(.minus))
