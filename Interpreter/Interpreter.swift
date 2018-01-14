@@ -70,6 +70,9 @@ class Interpreter {
             let result = self.expression()
             self.eat(.parenthesis(.close))
             return result
+        } else if self.currentToken == .operation(.minus) {
+            self.eat(.operation(.minus))
+            return -self.factor()
         } else {
             let token = self.currentToken
             self.eat(.type(.integer))

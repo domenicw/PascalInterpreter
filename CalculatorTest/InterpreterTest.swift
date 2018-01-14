@@ -25,8 +25,8 @@ class InterpreterTest: XCTestCase {
     }
     
     func testAddition() {
-        let additions: [String] = ["1+2", "7+13", "(60+ 4)", "2    +       5 "]
-        let results: [Int] = [3, 20, 64, 7]
+        let additions: [String] = ["-(2+2)", "7+13", "(60+ 4)", "2    +       5 "]
+        let results: [Int] = [-4, 20, 64, 7]
         for index in 0..<additions.count {
             self.calculateAndCompare(additions[index], result: results[index])
         }
@@ -41,8 +41,8 @@ class InterpreterTest: XCTestCase {
     }
     
     func testAddSub() {
-        let calc: [String] = ["1-2  + 4   - 7 +       23", "(54-23)-32-1", "65+ (43  + 3 )- 7", "    5       -   2 + 893"]
-        let results: [Int] = [19, -2, 104, 896]
+        let calc: [String] = ["1-2  + 4   - 7 +       23", "(54-23)-32-1", "65+ (43  + 3 )- 7", "    5       -   2 + 893", "-2    +  2"]
+        let results: [Int] = [19, -2, 104, 896, 0]
         for index in 0..<calc.count {
             self.calculateAndCompare(calc[index], result: results[index])
         }
