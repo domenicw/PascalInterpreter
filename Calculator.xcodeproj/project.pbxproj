@@ -13,6 +13,10 @@
 		B03D181A200AB7DF000C1951 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D42200A4C6F001C46D0 /* Interpreter.swift */; };
 		B03D181D200B4CCC000C1951 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D181C200B4CCC000C1951 /* Lexer.swift */; };
 		B061FF5B200B555C00487609 /* Lexer.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D181C200B4CCC000C1951 /* Lexer.swift */; };
+		B061FF5D200B70E400487609 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF5C200B70E400487609 /* Parser.swift */; };
+		B061FF5F200B714A00487609 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF5E200B714A00487609 /* AST.swift */; };
+		B061FF61200B716E00487609 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF60200B716E00487609 /* Number.swift */; };
+		B061FF63200B72BB00487609 /* BinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF62200B72BB00487609 /* BinaryOperation.swift */; };
 		B0D95D33200A4529001C46D0 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D32200A4529001C46D0 /* main.swift */; };
 		B0D95D3F200A4902001C46D0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
@@ -36,6 +40,10 @@
 		B03D1810200AB14B000C1951 /* InterpreterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpreterTest.swift; sourceTree = "<group>"; };
 		B03D1812200AB14B000C1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B03D181C200B4CCC000C1951 /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
+		B061FF5C200B70E400487609 /* Parser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Parser.swift; sourceTree = "<group>"; };
+		B061FF5E200B714A00487609 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
+		B061FF60200B716E00487609 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
+		B061FF62200B72BB00487609 /* BinaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryOperation.swift; sourceTree = "<group>"; };
 		B0D95D2F200A4529001C46D0 /* Calculator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Calculator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D95D32200A4529001C46D0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B0D95D3C200A46B4001C46D0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
@@ -105,6 +113,10 @@
 		B0D95D39200A4689001C46D0 /* Parser */ = {
 			isa = PBXGroup;
 			children = (
+				B061FF5C200B70E400487609 /* Parser.swift */,
+				B061FF5E200B714A00487609 /* AST.swift */,
+				B061FF60200B716E00487609 /* Number.swift */,
+				B061FF62200B72BB00487609 /* BinaryOperation.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -236,10 +248,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B061FF61200B716E00487609 /* Number.swift in Sources */,
 				B0D95D43200A4C6F001C46D0 /* Interpreter.swift in Sources */,
+				B061FF5F200B714A00487609 /* AST.swift in Sources */,
+				B061FF5D200B70E400487609 /* Parser.swift in Sources */,
 				B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */,
 				B0D95D33200A4529001C46D0 /* main.swift in Sources */,
 				B0D95D3F200A4902001C46D0 /* Token.swift in Sources */,
+				B061FF63200B72BB00487609 /* BinaryOperation.swift in Sources */,
 				B03D181D200B4CCC000C1951 /* Lexer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
