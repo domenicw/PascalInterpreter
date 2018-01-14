@@ -23,6 +23,8 @@ extension Token: Equatable {
             return val == Type.integer
         case (.integer, .type(let val)):
             return val == Type.integer
+        case (.parenthesis(let left), .parenthesis(let right)):
+            return left == right
         default:
             return false
         }
@@ -46,8 +48,21 @@ extension Operation: Equatable {
     }
 }
 
+extension Parenthesis: Equatable {
+    static public func ==(lhs: Parenthesis, rhs: Parenthesis) -> Bool {
+        switch (lhs, rhs) {
+        case (.open, .open):
+            return true
+        case (.close, .close):
+            return true
+        default:
+            return false
+        }
+    }
+}
+
 extension Token: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         switch self {
         case .integer:
             return "INTEGER"
@@ -55,6 +70,8 @@ extension Token: CustomStringConvertible {
             return "OPERATION \(val)"
         case .type(let val):
             return "TYPE \(val)"
+        case .parenthesis(let val):
+            return "PARENTHESIS \(val)"
         case .eof:
             return "EOF"
         }
@@ -62,7 +79,7 @@ extension Token: CustomStringConvertible {
 }
 
 extension Type: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         switch self {
         case .integer:
             return "INTEGER"
@@ -71,7 +88,7 @@ extension Type: CustomStringConvertible {
 }
 
 extension Operation: CustomStringConvertible {
-    var description: String {
+    public var description: String {
         switch self {
         case .minus:
             return "MINUS"
@@ -81,6 +98,17 @@ extension Operation: CustomStringConvertible {
             return "MULT"
         case .div:
             return "DIV"
+        }
+    }
+}
+
+extension Parenthesis: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .open:
+            return "OPEN"
+        case .close:
+            return "CLOSE"
         }
     }
 }

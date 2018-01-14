@@ -116,6 +116,16 @@ class Lexer {
                 return Token.operation(.div)
             }
             
+            if currentCharacter == "(" {
+                self.advance()
+                return Token.parenthesis(.open)
+            }
+            
+            if currentCharacter == ")" {
+                self.advance()
+                return Token.parenthesis(.close)
+            }
+            
             if let _ = Int("\(currentCharacter)") {
                 let integer = self.integer()
                 return Token.integer(integer)

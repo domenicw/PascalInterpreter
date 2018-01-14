@@ -8,20 +8,26 @@
 
 import Foundation
 
-enum Token {
+public enum Token {
     case integer(Int)
     case operation(Operation)
     case type(Type)
+    case parenthesis(Parenthesis)
     case eof
 }
 
-enum Type {
+public enum Type {
     case integer
 }
 
-enum Operation {
+public enum Operation {
     case minus
     case plus
     case mult
     case div
+}
+
+public enum Parenthesis {
+    case open
+    case close
 }
