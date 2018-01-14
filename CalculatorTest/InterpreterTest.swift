@@ -71,4 +71,12 @@ class InterpreterTest: XCTestCase {
             self.calculateAndCompare(calc[index], result: results[index])
         }
     }
+    
+    func testAddSubMulDiv() {
+        let calc: [String] = ["1*2/2+4", "6/3-8/4", "12 *12+  12- 43*1", "    6  -     7  *   12"]
+        let results: [Int] = [5, 0, 113, -78]
+        for index in 0..<calc.count {
+            self.calculateAndCompare(calc[index], result: results[index])
+        }
+    }
 }

@@ -59,41 +59,60 @@ class Interpreter {
     /**
     Reads and returns the value of the current integer
      
+     - Note: factor: INTEGER
+    
     - Returns: Current Integer
      
     */
-    private func term() -> Int {
+    private func factor() -> Int {
         let token = self.currentToken
         self.eat(.type(.integer))
         return evaluate(token)
     }
     
     /**
-    Expresses the input text
+    Calculates terms
      
-     - Post: outputs calculated result
+     - Note: term: exp ((PLUS | MINUS) exp)*
+     
+    - Returns: Result of terms
+     
+    */
+    private func term() -> Int {
+        let operations: [Token] = [.operation(.minus), .operation(.plus)]
+        var result = self.expression()
+        
+        while operations.contains(self.currentToken) {
+            if self.currentToken == .operation(.minus) {
+                self.eat(.operation(.minus))
+                result -= self.expression()
+            } else if self.currentToken == .operation(.plus) {
+                self.eat(.operation(.plus))
+                result += self.expression()
+            }
+        }
+        return result
+    }
+    
+    /**
+    Calculates expressions
+     
+     - Note: exp: factor ((MULT | DIV) factor)*
+     
+     - Returns: Result of expressions
      
     */
     private func expression() -> Int {
-        let operations: [Token] = [.operation(.minus), .operation(.plus), .operation(.mult), .operation(.div)]
-        var result = self.term()
+        let operations: [Token] = [.operation(.mult), .operation(.div)]
+        var result = self.factor()
         
         while operations.contains(self.currentToken) {
-            switch currentToken {
-            case .operation(.minus):
-                self.eat(.operation(.minus))
-                result -= self.term()
-            case .operation(.plus):
-                self.eat(.operation(.plus))
-                result += self.term()
-            case .operation(.mult):
+            if self.currentToken == .operation(.mult) {
                 self.eat(.operation(.mult))
-                result *= self.term()
-            case .operation(.div):
+                result *= self.factor()
+            } else if self.currentToken == .operation(.div) {
                 self.eat(.operation(.div))
-                result /= self.term()
-            default:
-                fatalError("Error: this error should never throw. Something went seriously wrong!")
+                result /= self.factor()
             }
         }
         return result
@@ -104,7 +123,7 @@ class Interpreter {
      
     */
     public func interpret() -> Int {
-        return self.expression()
+        return self.term()
     }
  
 }
