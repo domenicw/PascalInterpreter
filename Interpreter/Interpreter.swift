@@ -90,6 +90,8 @@ class Interpreter {
     */
     public func interpret() -> Int {
         let tree = self.parser.parse()
+        let rpn = RPN(tree)
+        rpn.print()
         return self.eval(tree)
     }
  
