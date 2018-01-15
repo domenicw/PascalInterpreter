@@ -8,12 +8,20 @@
 
 import Foundation
 
-let text = readLine()
+let quit: [String] = ["q", "quit"]
 
-if let text = text {
+while true {
+    
+    print("> ", separator: "", terminator: "")
+    
+    let txt = readLine()
+    
+    guard let text = txt, !quit.contains(text.lowercased()) else {
+        break
+    }
+    
     let interpreter = Interpreter(text)
+    print(">> = ", separator: "", terminator: "")
     print(interpreter.interpret())
-} else {
-    fatalError("Error: no input!")
+    print("")
 }
-
