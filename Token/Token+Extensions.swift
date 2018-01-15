@@ -19,6 +19,18 @@ extension Token: Equatable {
             return left == right
         case (.parenthesis(let left), .parenthesis(let right)):
             return left == right
+        case (.begin, .begin):
+            return true
+        case (.end, .end):
+            return true
+        case (.dot, .dot):
+            return true
+        case (.id, .id):
+            return true
+        case (.assign, .assign):
+            return true
+        case (.semi, .semi):
+            return true
         default:
             return false
         }
@@ -73,6 +85,18 @@ extension Token: CustomStringConvertible {
             return "TYPE \(val)"
         case .parenthesis(let val):
             return "PARENTHESIS \(val)"
+        case .begin:
+            return "BEGIN"
+        case .end:
+            return "END"
+        case .dot:
+            return "DOT"
+        case .id:
+            return "ID"
+        case .assign:
+            return "ASSIGN"
+        case .semi:
+            return "SEMI"
         case .eof:
             return "EOF"
         }

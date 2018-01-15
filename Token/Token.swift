@@ -12,6 +12,12 @@ public enum Token {
     case operation(Operation)
     case type(Type)
     case parenthesis(Parenthesis)
+    case begin
+    case end
+    case dot
+    case id
+    case assign
+    case semi
     case eof
 }
 

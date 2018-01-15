@@ -215,7 +215,7 @@
 					};
 				};
 			};
-			buildConfigurationList = B0D95D2A200A4529001C46D0 /* Build configuration list for PBXProject "Calculator" */;
+			buildConfigurationList = B0D95D2A200A4529001C46D0 /* Build configuration list for PBXProject "PascalInterpreter" */;
 			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -449,7 +449,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0D95D2A200A4529001C46D0 /* Build configuration list for PBXProject "Calculator" */ = {
+		B0D95D2A200A4529001C46D0 /* Build configuration list for PBXProject "PascalInterpreter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0D95D34200A4529001C46D0 /* Debug */,
