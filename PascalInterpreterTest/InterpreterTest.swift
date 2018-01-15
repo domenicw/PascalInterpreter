@@ -1,13 +1,13 @@
 //
 //  InterpreterTest.swift
-//  CalculatorTest
+//  PascalInterpreterTest
 //
 //  Created by Domenic Wüthrich on 13.01.18.
 //  Copyright © 2018 Domenic Wüthrich. All rights reserved.
 //
 
 import XCTest
-@testable import Calculator
+@testable import PascalInterpreter
 
 class InterpreterTest: XCTestCase {
     

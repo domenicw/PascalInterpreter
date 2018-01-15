@@ -46,7 +46,7 @@
 /* Begin PBXFileReference section */
 		B0030CA7200B96DC00F63A60 /* RPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPN.swift; sourceTree = "<group>"; };
 		B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnaryOperation.swift; sourceTree = "<group>"; };
-		B03D180E200AB14B000C1951 /* CalculatorTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B03D180E200AB14B000C1951 /* PascalInterpreterTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PascalInterpreterTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03D1810200AB14B000C1951 /* InterpreterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpreterTest.swift; sourceTree = "<group>"; };
 		B03D1812200AB14B000C1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B03D181C200B4CCC000C1951 /* Lexer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lexer.swift; sourceTree = "<group>"; };
@@ -54,7 +54,7 @@
 		B061FF5E200B714A00487609 /* AST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AST.swift; sourceTree = "<group>"; };
 		B061FF60200B716E00487609 /* Number.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Number.swift; sourceTree = "<group>"; };
 		B061FF62200B72BB00487609 /* BinaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BinaryOperation.swift; sourceTree = "<group>"; };
-		B0D95D2F200A4529001C46D0 /* Calculator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Calculator; sourceTree = BUILT_PRODUCTS_DIR; };
+		B0D95D2F200A4529001C46D0 /* PascalInterpreter */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = PascalInterpreter; sourceTree = BUILT_PRODUCTS_DIR; };
 		B0D95D32200A4529001C46D0 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		B0D95D3C200A46B4001C46D0 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B0D95D3E200A4902001C46D0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
@@ -80,13 +80,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B03D180F200AB14B000C1951 /* CalculatorTest */ = {
+		B03D180F200AB14B000C1951 /* PascalInterpreterTest */ = {
 			isa = PBXGroup;
 			children = (
 				B03D1810200AB14B000C1951 /* InterpreterTest.swift */,
 				B03D1812200AB14B000C1951 /* Info.plist */,
 			);
-			path = CalculatorTest;
+			path = PascalInterpreterTest;
 			sourceTree = "<group>";
 		};
 		B0D95D26200A4529001C46D0 = {
@@ -97,8 +97,8 @@
 				B0D95D3B200A469E001C46D0 /* Interpreter */,
 				B0D95D3A200A4695001C46D0 /* Lexer */,
 				B0D95D39200A4689001C46D0 /* Parser */,
-				B0D95D31200A4529001C46D0 /* Calculator */,
-				B03D180F200AB14B000C1951 /* CalculatorTest */,
+				B0D95D31200A4529001C46D0 /* PascalInterpreter */,
+				B03D180F200AB14B000C1951 /* PascalInterpreterTest */,
 				B0D95D30200A4529001C46D0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,18 +106,18 @@
 		B0D95D30200A4529001C46D0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B0D95D2F200A4529001C46D0 /* Calculator */,
-				B03D180E200AB14B000C1951 /* CalculatorTest.xctest */,
+				B0D95D2F200A4529001C46D0 /* PascalInterpreter */,
+				B03D180E200AB14B000C1951 /* PascalInterpreterTest.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		B0D95D31200A4529001C46D0 /* Calculator */ = {
+		B0D95D31200A4529001C46D0 /* PascalInterpreter */ = {
 			isa = PBXGroup;
 			children = (
 				B0D95D32200A4529001C46D0 /* main.swift */,
 			);
-			path = Calculator;
+			path = PascalInterpreter;
 			sourceTree = "<group>";
 		};
 		B0D95D39200A4689001C46D0 /* Parser */ = {
@@ -161,9 +161,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		B03D180D200AB14B000C1951 /* CalculatorTest */ = {
+		B03D180D200AB14B000C1951 /* PascalInterpreterTest */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B03D1815200AB14B000C1951 /* Build configuration list for PBXNativeTarget "CalculatorTest" */;
+			buildConfigurationList = B03D1815200AB14B000C1951 /* Build configuration list for PBXNativeTarget "PascalInterpreterTest" */;
 			buildPhases = (
 				B03D180A200AB14B000C1951 /* Sources */,
 				B03D180B200AB14B000C1951 /* Frameworks */,
@@ -173,14 +173,14 @@
 			);
 			dependencies = (
 			);
-			name = CalculatorTest;
+			name = PascalInterpreterTest;
 			productName = CalculatorTest;
-			productReference = B03D180E200AB14B000C1951 /* CalculatorTest.xctest */;
+			productReference = B03D180E200AB14B000C1951 /* PascalInterpreterTest.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		B0D95D2E200A4529001C46D0 /* Calculator */ = {
+		B0D95D2E200A4529001C46D0 /* PascalInterpreter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B0D95D36200A4529001C46D0 /* Build configuration list for PBXNativeTarget "Calculator" */;
+			buildConfigurationList = B0D95D36200A4529001C46D0 /* Build configuration list for PBXNativeTarget "PascalInterpreter" */;
 			buildPhases = (
 				B0D95D2B200A4529001C46D0 /* Sources */,
 				B0D95D2C200A4529001C46D0 /* Frameworks */,
@@ -190,9 +190,9 @@
 			);
 			dependencies = (
 			);
-			name = Calculator;
+			name = PascalInterpreter;
 			productName = Calculator;
-			productReference = B0D95D2F200A4529001C46D0 /* Calculator */;
+			productReference = B0D95D2F200A4529001C46D0 /* PascalInterpreter */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
@@ -227,8 +227,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				B0D95D2E200A4529001C46D0 /* Calculator */,
-				B03D180D200AB14B000C1951 /* CalculatorTest */,
+				B0D95D2E200A4529001C46D0 /* PascalInterpreter */,
+				B03D180D200AB14B000C1951 /* PascalInterpreterTest */,
 			);
 		};
 /* End PBXProject section */
@@ -289,9 +289,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 28J3L9UEGT;
-				INFOPLIST_FILE = CalculatorTest/Info.plist;
+				INFOPLIST_FILE = PascalInterpreterTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.domenicw.CalculatorTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.domenicw.PascalInterpreterTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -303,9 +303,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 28J3L9UEGT;
-				INFOPLIST_FILE = CalculatorTest/Info.plist;
+				INFOPLIST_FILE = PascalInterpreterTest/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.domenicw.CalculatorTest;
+				PRODUCT_BUNDLE_IDENTIFIER = com.domenicw.PascalInterpreterTest;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -440,7 +440,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		B03D1815200AB14B000C1951 /* Build configuration list for PBXNativeTarget "CalculatorTest" */ = {
+		B03D1815200AB14B000C1951 /* Build configuration list for PBXNativeTarget "PascalInterpreterTest" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B03D1813200AB14B000C1951 /* Debug */,
@@ -458,7 +458,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B0D95D36200A4529001C46D0 /* Build configuration list for PBXNativeTarget "Calculator" */ = {
+		B0D95D36200A4529001C46D0 /* Build configuration list for PBXNativeTarget "PascalInterpreter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				B0D95D37200A4529001C46D0 /* Debug */,
