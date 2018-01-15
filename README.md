@@ -1,5 +1,5 @@
-#  TinyCalc
+#  Pascal Interpreter
 
-This is a tiny calculator written is Swift. It has it's own compiler and interpreter.
+This is a small interpreter written in Swift. It takes in a basic Pascal programm and computes it.
 
-It is based on [this tutorial](https://ruslanspivak.com/lsbasi-part1/).
+This project is based on [this tutorial](https://ruslanspivak.com/lsbasi-part1/).
