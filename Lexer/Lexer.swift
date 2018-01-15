@@ -16,6 +16,11 @@ class Lexer {
     private var charPosition: Int
     // Current character
     private var currentCharacter: Character?
+    // Reserved Keywords
+    private let keywords: [String: Token] = [
+        "BEGIN": .begin,
+        "END": .end
+    ]
     
     /**
     Initializer for the Lexer
@@ -68,6 +73,24 @@ class Lexer {
     }
     
     /**
+     Combines multiple characters to ids
+     
+     - Returns: keyword token or id token
+     
+     */
+    private func id() -> Token {
+        var lexem = ""
+        while let char = self.currentCharacter, char.isAlphanumeric() {
+            lexem += String(char)
+            self.advance()
+        }
+        if let token = self.keywords[lexem] {
+            return token
+        }
+        return .id(lexem)
+    }
+    
+    /**
      Combines multiple characters to multi digit integers
      
      - Returns: input integer
@@ -75,8 +98,8 @@ class Lexer {
      */
     private func integer() -> Int {
         var number: Int = 0
-        while let currentCharacter = self.currentCharacter, let currentNumber = Int("\(currentCharacter)") {
-            number = number * 10 + currentNumber
+        while let currentChar = self.currentCharacter, currentChar.isNumeric(), let digit = Int("\(currentChar)") {
+            number = number * 10 + digit
             self.advance()
         }
         return number
@@ -94,6 +117,26 @@ class Lexer {
             if currentCharacter == " " {
                 self.skipWhiteSpace()
                 continue
+            }
+            
+            if currentCharacter.isAlpha() {
+                return self.id()
+            }
+            
+            if currentCharacter == "." {
+                self.advance()
+                return Token.dot
+            }
+            
+            if currentCharacter == ":" && self.peek() == "=" {
+                self.advance()
+                self.advance()
+                return Token.assign
+            }
+            
+            if currentCharacter == ";" {
+                self.advance()
+                return Token.semi
             }
             
             if currentCharacter == "+" {

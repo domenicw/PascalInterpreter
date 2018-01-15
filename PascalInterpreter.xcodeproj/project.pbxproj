@@ -29,6 +29,11 @@
 		B0D95D3F200A4902001C46D0 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
 		B0D95D43200A4C6F001C46D0 /* Interpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D42200A4C6F001C46D0 /* Interpreter.swift */; };
+		B0E6E5CD200D40C700733F04 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5CC200D40C700733F04 /* Character.swift */; };
+		B0E6E5CE200D41E700733F04 /* Character.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5CC200D40C700733F04 /* Character.swift */; };
+		B0E6E5D2200D442D00733F04 /* LexerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5D1200D442D00733F04 /* LexerTest.swift */; };
+		B0E6E5D4200D46BE00733F04 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5D3200D46BE00733F04 /* Compound.swift */; };
+		B0E6E5D5200D47EE00733F04 /* Compound.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5D3200D46BE00733F04 /* Compound.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -60,6 +65,9 @@
 		B0D95D3E200A4902001C46D0 /* Token.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Token.swift; sourceTree = "<group>"; };
 		B0D95D40200A4924001C46D0 /* Token+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Token+Extensions.swift"; sourceTree = "<group>"; };
 		B0D95D42200A4C6F001C46D0 /* Interpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interpreter.swift; sourceTree = "<group>"; };
+		B0E6E5CC200D40C700733F04 /* Character.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Character.swift; sourceTree = "<group>"; };
+		B0E6E5D1200D442D00733F04 /* LexerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LexerTest.swift; sourceTree = "<group>"; };
+		B0E6E5D3200D46BE00733F04 /* Compound.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Compound.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -84,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				B03D1810200AB14B000C1951 /* InterpreterTest.swift */,
+				B0E6E5D1200D442D00733F04 /* LexerTest.swift */,
 				B03D1812200AB14B000C1951 /* Info.plist */,
 			);
 			path = PascalInterpreterTest;
@@ -93,6 +102,7 @@
 			isa = PBXGroup;
 			children = (
 				B0D95D3C200A46B4001C46D0 /* README.md */,
+				B0E6E5CB200D40B600733F04 /* Extension */,
 				B0D95D3D200A48E3001C46D0 /* Token */,
 				B0D95D3B200A469E001C46D0 /* Interpreter */,
 				B0D95D3A200A4695001C46D0 /* Lexer */,
@@ -128,6 +138,7 @@
 				B061FF60200B716E00487609 /* Number.swift */,
 				B061FF62200B72BB00487609 /* BinaryOperation.swift */,
 				B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */,
+				B0E6E5D3200D46BE00733F04 /* Compound.swift */,
 			);
 			path = Parser;
 			sourceTree = "<group>";
@@ -156,6 +167,14 @@
 				B0D95D40200A4924001C46D0 /* Token+Extensions.swift */,
 			);
 			path = Token;
+			sourceTree = "<group>";
+		};
+		B0E6E5CB200D40B600733F04 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				B0E6E5CC200D40C700733F04 /* Character.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,6 +270,8 @@
 				B0030CA5200B801500F63A60 /* Number.swift in Sources */,
 				B03D181A200AB7DF000C1951 /* Interpreter.swift in Sources */,
 				B0030CA4200B801300F63A60 /* AST.swift in Sources */,
+				B0E6E5D2200D442D00733F04 /* LexerTest.swift in Sources */,
+				B0E6E5CE200D41E700733F04 /* Character.swift in Sources */,
 				B03D1811200AB14B000C1951 /* InterpreterTest.swift in Sources */,
 				B0030CA3200B801000F63A60 /* Parser.swift in Sources */,
 				B0030CAC200BA08600F63A60 /* UnaryOperation.swift in Sources */,
@@ -258,6 +279,7 @@
 				B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */,
 				B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */,
 				B061FF5B200B555C00487609 /* Lexer.swift in Sources */,
+				B0E6E5D4200D46BE00733F04 /* Compound.swift in Sources */,
 				B0030CA9200B9A9000F63A60 /* RPN.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,6 +291,8 @@
 				B061FF61200B716E00487609 /* Number.swift in Sources */,
 				B0D95D43200A4C6F001C46D0 /* Interpreter.swift in Sources */,
 				B061FF5F200B714A00487609 /* AST.swift in Sources */,
+				B0E6E5CD200D40C700733F04 /* Character.swift in Sources */,
+				B0E6E5D5200D47EE00733F04 /* Compound.swift in Sources */,
 				B061FF5D200B70E400487609 /* Parser.swift in Sources */,
 				B0D95D41200A4924001C46D0 /* Token+Extensions.swift in Sources */,
 				B0030CAB200B9E5800F63A60 /* UnaryOperation.swift in Sources */,

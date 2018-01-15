@@ -25,8 +25,8 @@ extension Token: Equatable {
             return true
         case (.dot, .dot):
             return true
-        case (.id, .id):
-            return true
+        case (.id(let left), .id(let right)):
+            return left == right
         case (.assign, .assign):
             return true
         case (.semi, .semi):

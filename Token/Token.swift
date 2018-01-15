@@ -15,7 +15,7 @@ public enum Token {
     case begin
     case end
     case dot
-    case id
+    case id(String)
     case assign
     case semi
     case eof
