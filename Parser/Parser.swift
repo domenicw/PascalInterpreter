@@ -192,9 +192,8 @@ public class Parser {
     private func statementList() -> [AST] {
         var list: [AST] = [self.statement()]
         if self.currentToken == .semi {
-            self.statementList().forEach({ (statement) in
-                list.append(statement)
-            })
+            self.eat(.semi)
+            list.append(contentsOf: self.statementList())
         }
         return list
     }

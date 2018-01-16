@@ -40,6 +40,7 @@
 		B0E6E5DB200D494000733F04 /* Variable.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5D9200D494000733F04 /* Variable.swift */; };
 		B0E6E5DD200D4A2500733F04 /* NoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5DC200D4A2500733F04 /* NoOperation.swift */; };
 		B0E6E5DE200D4A2500733F04 /* NoOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5DC200D4A2500733F04 /* NoOperation.swift */; };
+		B0E6E5E0200EA87900733F04 /* ParserTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E6E5DF200EA87900733F04 /* ParserTest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,6 +78,7 @@
 		B0E6E5D6200D487A00733F04 /* Assign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assign.swift; sourceTree = "<group>"; };
 		B0E6E5D9200D494000733F04 /* Variable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Variable.swift; sourceTree = "<group>"; };
 		B0E6E5DC200D4A2500733F04 /* NoOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoOperation.swift; sourceTree = "<group>"; };
+		B0E6E5DF200EA87900733F04 /* ParserTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParserTest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			children = (
 				B03D1810200AB14B000C1951 /* InterpreterTest.swift */,
 				B0E6E5D1200D442D00733F04 /* LexerTest.swift */,
+				B0E6E5DF200EA87900733F04 /* ParserTest.swift */,
 				B03D1812200AB14B000C1951 /* Info.plist */,
 			);
 			path = PascalInterpreterTest;
@@ -293,6 +296,7 @@
 				B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */,
 				B061FF5B200B555C00487609 /* Lexer.swift in Sources */,
 				B0E6E5DB200D494000733F04 /* Variable.swift in Sources */,
+				B0E6E5E0200EA87900733F04 /* ParserTest.swift in Sources */,
 				B0E6E5D4200D46BE00733F04 /* Compound.swift in Sources */,
 				B0E6E5DE200D4A2500733F04 /* NoOperation.swift in Sources */,
 				B0030CA9200B9A9000F63A60 /* RPN.swift in Sources */,
