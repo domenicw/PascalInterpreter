@@ -41,7 +41,7 @@ public class Parser {
     }
     
     /**
-     Reads and returns the value of the current integer
+     Parses factors
      
      - Note: factor: [ + | - ] INTEGER | [ + | - ] "(" exp ")"
      
@@ -49,29 +49,30 @@ public class Parser {
      
      */
     private func factor() -> AST {
-        if self.currentToken == .parenthesis(.open) {
+        switch self.currentToken {
+        case .parenthesis(.open):
             self.eat(.parenthesis(.open))
             let result = self.expression()
             self.eat(.parenthesis(.close))
             return result
-        } else if self.currentToken == .operation(.minus) {
+        case .operation(.minus):
             self.eat(.operation(.minus))
             return UnaryOperation(Token.operation(.minus), left: self.factor())
-        } else if self.currentToken == .operation(.plus) {
+        case .operation(.plus):
             self.eat(.operation(.plus))
             return UnaryOperation(Token.operation(.plus), left: self.factor())
-        } else {
+        case .type(.integer):
             let token = self.currentToken
-            if case .type(.integer) = token {
-                self.eat(token)
-                return Number(token)
-            }
-            fatalError("Error: token: \(token) is not a number")
+            self.eat(token)
+            return Number(token)
+        default:
+            let variable = self.variable()
+            return variable
         }
     }
     
     /**
-     Calculates terms
+     Parses terms
      
      - Note: term: factor ((MULT | DIV) factor)*
      
@@ -95,7 +96,7 @@ public class Parser {
     }
     
     /**
-     Calculates expressions
+     Parses expressions
      
      - Note: exp: term ((PLUS | MINUS) term)*
      
@@ -119,11 +120,126 @@ public class Parser {
     }
     
     /**
+     Parses variable
+     
+     - Note: variable: ID
+     
+     - Returns: Result AST of variable
+     
+     */
+    private func variable() -> Variable {
+        let variable = Variable(self.currentToken)
+        self.eat(.id(variable.name))
+        return variable
+    }
+    
+    /**
+     Parses assignment statements
+     
+     - Note: assignmentStatement: variable ASSIGN expr
+     
+     - Returns: Result AST of assignment statement
+     
+     */
+    private func assignmentStatement() -> AST {
+        let left = self.variable()
+        let token = self.currentToken
+        self.eat(.assign)
+        let right = self.expression()
+        let assign = Assign(token, left: left, right: right)
+        return assign
+    }
+    
+    /**
+     Parses empty statement
+     
+     - Note: empty:
+     
+     - Returns: Empty AST
+     
+     */
+    private func empty() -> AST {
+        return NoOperation()
+    }
+    
+    /**
+     Parses statements
+     
+     - Note: statement: compoundStatement | assignmentStatement | empty
+     
+     - Returns: Result AST of statement
+     
+     */
+    private func statement() -> AST {
+        switch currentToken {
+        case .begin:
+            return self.compoundStatement()
+        case .id:
+            return self.assignmentStatement()
+        default:
+            return self.empty()
+        }
+    }
+    
+    /**
+     Parses list of statements
+     
+     - Note: statementList: statement | statement SEMI statementList
+     
+     - Returns: Array of statements
+     
+     */
+    private func statementList() -> [AST] {
+        var list: [AST] = [self.statement()]
+        if self.currentToken == .semi {
+            self.statementList().forEach({ (statement) in
+                list.append(statement)
+            })
+        }
+        return list
+    }
+    
+    /**
+     Parses compound statements
+     
+     - Note: compoundStatement: BEGIN statementList END
+     
+     - Returns: A compound statement
+     
+     */
+    private func compoundStatement() -> AST {
+        self.eat(.begin)
+        let statements = self.statementList()
+        let compound = Compound(statements)
+        self.eat(.end)
+        return compound
+    }
+    
+    /**
+     Parses program
+     
+     - Note: program: compoundStatement DOT
+     
+     - Returns: Result AST of program
+     
+     */
+    private func program() -> AST {
+        let node = self.compoundStatement()
+        self.eat(.dot)
+        return node
+    }
+    
+    /**
      Parses initialized text
      
      - Returns: AST of parsed text
+     
      */
     public func parse() -> AST {
-        return self.expression()
+        let tree = self.program()
+        guard self.currentToken == .eof else {
+            fatalError("Error: unexpectedly found \(self.currentToken) instead of EOF")
+        }
+        return tree
     }
 }
