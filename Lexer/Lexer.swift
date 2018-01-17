@@ -19,7 +19,8 @@ class Lexer {
     // Reserved Keywords
     private let keywords: [String: Token] = [
         "BEGIN": .begin,
-        "END": .end
+        "END": .end,
+        "DIV": .operation(.div)
     ]
     
     /**
@@ -80,11 +81,11 @@ class Lexer {
      */
     private func id() -> Token {
         var lexem = ""
-        while let char = self.currentCharacter, char.isAlphanumeric() {
+        while let char = self.currentCharacter, char.isAlphanumeric() || char == "_"  {
             lexem += String(char)
             self.advance()
         }
-        if let token = self.keywords[lexem] {
+        if let token = self.keywords[lexem.uppercased()] {
             return token
         }
         return .id(lexem)
@@ -119,7 +120,7 @@ class Lexer {
                 continue
             }
             
-            if currentCharacter.isAlpha() {
+            if currentCharacter.isAlpha() || currentCharacter == "_" {
                 return self.id()
             }
             
