@@ -10,6 +10,9 @@ import Foundation
 
 class Interpreter {
     
+    // Globale Scope
+    public private(set) var globalScope: [String: Int]
+    
     // Parser
     private let parser: Parser
     
@@ -21,6 +24,7 @@ class Interpreter {
     */
     public init(_ text: String) {
         self.parser = Parser(text)
+        self.globalScope = [:]
     }
     
     /**
@@ -39,6 +43,17 @@ class Interpreter {
             return self.eval(number)
         case let unary as UnaryOperation:
             return self.eval(unary)
+        case let compound as Compound:
+            self.eval(compound)
+            return 0
+        case let assign as Assign:
+            self.eval(assign)
+            return 0
+        case let variable as Variable:
+            return self.eval(variable)
+        case let noOp as NoOperation:
+            self.eval(noOp)
+            return 0
         default:
             fatalError("Error: unknows node type: \(node)")
         }
@@ -98,16 +113,64 @@ class Interpreter {
         }
     }
     
+    /**
+     Evaluates Compound nodes
+     
+     - Parameter compound: A node to evaluate
+     
+     */
+    private func eval(_ compound: Compound) {
+        for child in compound.children {
+            let _ = self.eval(child)
+        }
+    }
+    
+    /**
+     Evaluates Assign nodes
+     Updates global scope with variable and associated value
+     
+     - Parameter assign: A node to evaluate
+     
+     */
+    private func eval(_ assign: Assign) {
+        let name = assign.left.name
+        self.globalScope[name] = self.eval(assign.right)
+    }
+    
+    
+    /**
+     Evaluates Variable nodes
+     
+     - Parameter variable: A node to evaluate
+     
+     - Returns: Value for variable
+     
+     */
+    private func eval(_ variable: Variable) -> Int {
+        let name = variable.name
+        if let node = self.globalScope[name] {
+            return node
+        }
+        fatalError("Error: variable \(name) is undefined!")
+    }
+    
+    /**
+     Evaluates NoOpeation nodes
+     
+     - Note: Does nothing
+     
+     - Parameter noOperation: A node to evaluate
+     
+     */
+    private func eval(_ noOperation: NoOperation) {}
     
     /**
     Interprets initialized text
      
     */
-    public func interpret() -> Int {
+    public func interpret() {
         let tree = self.parser.parse()
-        //let rpn = RPN(tree)
-        //rpn.print()
-        return self.eval(tree)
+        let _ = self.eval(tree)
     }
  
 }

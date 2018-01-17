@@ -22,6 +22,7 @@ while true {
     
     let interpreter = Interpreter(text)
     print(">> = ", separator: "", terminator: "")
-    print(interpreter.interpret())
+    interpreter.interpret()
+    print(interpreter.globalScope)
     print("")
 }
