@@ -17,13 +17,23 @@ extension Token: Equatable {
             return true
         case (.type(let left), .type(let right)):
             return left == right
+        case (.constant(let left), .constant(let right)):
+            return left == right
         case (.parenthesis(let left), .parenthesis(let right)):
             return left == right
+        case (.program, .program):
+            return true
+        case (.variable, .variable):
+            return true
         case (.begin, .begin):
             return true
         case (.end, .end):
             return true
         case (.dot, .dot):
+            return true
+        case (.colon, .colon):
+            return true
+        case (.coma, .coma):
             return true
         case (.id(let left), .id(let right)):
             return left == right
@@ -31,6 +41,19 @@ extension Token: Equatable {
             return true
         case (.semi, .semi):
             return true
+        default:
+            return false
+        }
+    }
+}
+
+extension Constant: Equatable {
+    static public func ==(lhs: Constant, rhs: Constant) -> Bool {
+        switch (lhs, rhs) {
+        case (.integer(let left), .integer(let right)):
+            return left == right
+        case (.real(let left), .real(let right)):
+            return left == right
         default:
             return false
         }
@@ -46,7 +69,9 @@ extension Operation: Equatable {
             return true
         case (.mult, .mult):
             return true
-        case (.div, .div):
+        case (.integerDiv, .integerDiv):
+            return true
+        case (.floatDiv, .floatDiv):
             return true
         default:
             return false
@@ -70,8 +95,12 @@ extension Parenthesis: Equatable {
 extension Type: Equatable {
     static public func ==(lhs: Type, rhs: Type) -> Bool {
         switch (lhs, rhs) {
-        case (.integer(let left), .integer(let right)):
-            return left == right
+        case (.integer, .integer):
+            return true
+        case (.real, .real):
+            return true
+        default:
+            return false
         }
     }
 }
@@ -83,14 +112,24 @@ extension Token: CustomStringConvertible {
             return "OPERATION \(val)"
         case .type(let val):
             return "TYPE \(val)"
+        case .constant(let val):
+            return "CONSTANT \(val)"
         case .parenthesis(let val):
             return "PARENTHESIS \(val)"
+        case .program:
+            return "PROGRAM"
+        case .variable:
+            return "VARIABLE"
         case .begin:
             return "BEGIN"
         case .end:
             return "END"
         case .dot:
             return "DOT"
+        case .colon:
+            return "COLON"
+        case .coma:
+            return "COMA"
         case .id:
             return "ID"
         case .assign:
@@ -103,11 +142,24 @@ extension Token: CustomStringConvertible {
     }
 }
 
+extension Constant: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case .integer:
+            return "INTEGER"
+        case .real:
+            return "REAL"
+        }
+    }
+}
+
 extension Type: CustomStringConvertible {
     public var description: String {
         switch self {
         case .integer:
             return "INTEGER"
+        case .real:
+            return "REAL"
         }
     }
 }
@@ -121,7 +173,7 @@ extension Operation: CustomStringConvertible {
             return "PLUS"
         case .mult:
             return "MULT"
-        case .div:
+        case .integerDiv, .floatDiv:
             return "DIV"
         }
     }
