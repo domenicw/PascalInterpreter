@@ -67,7 +67,7 @@ public class RPN {
             return "\(eval(operation.left)) \(eval(operation.right)) + "
         case .operation(.mult):
             return "\(eval(operation.left)) \(eval(operation.right)) * "
-        case .operation(.div):
+        case .operation(.integerDiv):
             return "\(eval(operation.left)) \(eval(operation.right)) / "
         default:
             fatalError("Error: unknow binary operation type \(operation.token)")

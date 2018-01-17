@@ -61,7 +61,7 @@ public class Parser {
         case .operation(.plus):
             self.eat(.operation(.plus))
             return UnaryOperation(Token.operation(.plus), left: self.factor())
-        case .type(.integer):
+        case .constant(.integer):
             let token = self.currentToken
             self.eat(token)
             return Number(token)
@@ -80,15 +80,15 @@ public class Parser {
      
      */
     private func term() -> AST {
-        let operations: [Token] = [.operation(.mult), .operation(.div)]
+        let operations: [Token] = [.operation(.mult), .operation(.integerDiv)]
         
         var node = self.factor()
         while operations.contains(self.currentToken) {
             let token = self.currentToken
             if token == .operation(.mult) {
                 self.eat(.operation(.mult))
-            } else if token == .operation(.div) {
-                self.eat(.operation(.div))
+            } else if token == .operation(.integerDiv) {
+                self.eat(.operation(.integerDiv))
             }
             node = BinaryOperation(token, left: node, right: self.factor())
         }

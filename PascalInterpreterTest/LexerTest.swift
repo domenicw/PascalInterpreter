@@ -29,7 +29,7 @@ class LexerTest: XCTestCase {
         let assign = lexer.nextToken()
         XCTAssertEqual(assign, .assign)
         let digit = lexer.nextToken()
-        XCTAssertEqual(digit, .type(.integer(2)))
+        XCTAssertEqual(digit, .constant(.integer(2)))
         let semi = lexer.nextToken()
         XCTAssertEqual(semi, .semi)
         let end = lexer.nextToken()

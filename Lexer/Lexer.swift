@@ -20,7 +20,7 @@ class Lexer {
     private let keywords: [String: Token] = [
         "BEGIN": .begin,
         "END": .end,
-        "DIV": .operation(.div)
+        "DIV": .operation(.integerDiv)
     ]
     
     /**
@@ -157,7 +157,7 @@ class Lexer {
             
             if currentCharacter == "/" {
                 self.advance()
-                return Token.operation(.div)
+                return Token.operation(.floatDiv)
             }
             
             if currentCharacter == "(" {
@@ -172,7 +172,7 @@ class Lexer {
             
             if let _ = Int("\(currentCharacter)") {
                 let integer = self.integer()
-                return Token.type(.integer(integer))
+                return Token.constant(.integer(integer))
             }
             
             fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.charPosition)")
