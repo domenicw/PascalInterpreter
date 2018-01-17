@@ -31,4 +31,11 @@ extension Character {
         return false
     }
     
+    public func isWhitespaceOrNewLine() -> Bool {
+        if let char = self.unicodeScalars.first {
+            return CharacterSet.whitespacesAndNewlines.contains(char)
+        }
+        return false
+    }
+    
 }

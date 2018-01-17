@@ -140,7 +140,7 @@ class Lexer {
     public func nextToken() -> Token {
         while let currentCharacter = self.currentCharacter {
             
-            if currentCharacter == " " {
+            if currentCharacter.isWhitespaceOrNewLine() {
                 self.skipWhiteSpace()
                 continue
             }
