@@ -18,6 +18,10 @@ class Lexer {
     private var currentCharacter: Character?
     // Reserved Keywords
     private let keywords: [String: Token] = [
+        "PROGRAM": .program,
+        "VAR": .variable,
+        "INTEGER": .type(.integer),
+        "REAL": .type(.real),
         "BEGIN": .begin,
         "END": .end,
         "DIV": .operation(.integerDiv)
@@ -36,13 +40,24 @@ class Lexer {
     }
     
     /**
-     Skips white spaces of input text
+     Skips white spaces input program
      
      */
     private func skipWhiteSpace() {
-        while self.currentCharacter == " " {
+        while let currentChar = self.currentCharacter, currentChar == " " {
             self.advance()
         }
+    }
+    
+    /**
+     Skips comments in input program
+     
+     */
+    private func skipComments() {
+        while let currentChar = self.currentCharacter, currentChar != "}" {
+            self.advance()
+        }
+        self.advance()
     }
     
     /**
@@ -92,18 +107,28 @@ class Lexer {
     }
     
     /**
-     Combines multiple characters to multi digit integers
+     Combines multiple characters to multi digit constant number
      
-     - Returns: input integer
+     - Returns: input constant number
      
      */
-    private func integer() -> Int {
-        var number: Int = 0
-        while let currentChar = self.currentCharacter, currentChar.isNumeric(), let digit = Int("\(currentChar)") {
-            number = number * 10 + digit
+    private func number() -> Constant {
+        var number: String = ""
+        while let currentChar = self.currentCharacter, currentChar.isNumeric() {
+            number += String(currentChar)
             self.advance()
         }
-        return number
+        
+        if let currentChar = self.currentCharacter, currentChar == "." {
+            number += String(currentChar)
+            repeat {
+                number += String(currentChar)
+                self.advance()
+            } while currentChar.isNumeric()
+            return .real(Float(number)!)
+        }
+        
+        return .integer(Int(number)!)
     }
     
     /**
@@ -120,64 +145,78 @@ class Lexer {
                 continue
             }
             
+            if currentCharacter == "{" {
+                self.skipComments()
+                continue
+            }
+            
             if currentCharacter.isAlpha() || currentCharacter == "_" {
                 return self.id()
             }
             
             if currentCharacter == "." {
                 self.advance()
-                return Token.dot
+                return .dot
             }
             
             if currentCharacter == ":" && self.peek() == "=" {
                 self.advance()
                 self.advance()
-                return Token.assign
+                return .assign
             }
             
             if currentCharacter == ";" {
                 self.advance()
-                return Token.semi
+                return .semi
+            }
+            
+            if currentCharacter == "," {
+                self.advance()
+                return .coma
+            }
+            
+            if currentCharacter == ":" {
+                self.advance()
+                return .colon
             }
             
             if currentCharacter == "+" {
                 self.advance()
-                return Token.operation(.plus)
+                return .operation(.plus)
             }
             
             if currentCharacter == "-" {
                 self.advance()
-                return Token.operation(.minus)
+                return .operation(.minus)
             }
             
             if currentCharacter == "*" {
                 self.advance()
-                return Token.operation(.mult)
+                return .operation(.mult)
             }
             
             if currentCharacter == "/" {
                 self.advance()
-                return Token.operation(.floatDiv)
+                return .operation(.floatDiv)
             }
             
             if currentCharacter == "(" {
                 self.advance()
-                return Token.parenthesis(.open)
+                return .parenthesis(.open)
             }
             
             if currentCharacter == ")" {
                 self.advance()
-                return Token.parenthesis(.close)
+                return .parenthesis(.close)
             }
             
-            if let _ = Int("\(currentCharacter)") {
-                let integer = self.integer()
-                return Token.constant(.integer(integer))
+            if currentCharacter.isNumeric() {
+                return .constant(self.number())
             }
             
             fatalError("Unexpected character: \(self.currentCharacter!) at position: \(self.charPosition)")
         }
         
-        return Token.eof
+        return .eof
     }
 }
