@@ -45,18 +45,24 @@ class Interpreter {
             return self.eval(unary)
         case let compound as Compound:
             self.eval(compound)
-            return 0
         case let assign as Assign:
             self.eval(assign)
-            return 0
         case let variable as Variable:
             return self.eval(variable)
         case let noOp as NoOperation:
             self.eval(noOp)
-            return 0
+        case let program as Program:
+            self.eval(program)
+        case let block as Block:
+            self.eval(block)
+        case let declaration as VariableDeclaration:
+            self.eval(declaration)
+        case let type as VariableType:
+            self.eval(type)
         default:
             fatalError("Error: unknows node type: \(node)")
         }
+        return 0
     }
     
     /**
@@ -87,7 +93,7 @@ class Interpreter {
             return eval(operation.left) + eval(operation.right)
         case .operation(.mult):
             return eval(operation.left) * eval(operation.right)
-        case .operation(.integerDiv):
+        case .operation(.integerDiv), .operation(.floatDiv):
             return eval(operation.left) / eval(operation.right)
         default:
             fatalError("Error: unknow binary operation type \(operation.token)")
@@ -163,6 +169,45 @@ class Interpreter {
      
      */
     private func eval(_ noOperation: NoOperation) {}
+    
+    /**
+     Evaluates VariableTypes
+     
+     - Parameter type: A VariableType to evaluate
+     
+     */
+    private func eval(_ type: VariableType) {}
+    
+    /**
+     Evaluates VariableDeclarations
+     
+     - Parameter declaration: A VariableDeclaration to evaluate
+     
+     */
+    private func eval(_ declaration: VariableDeclaration) {}
+    
+    /**
+     Evaluates Block nodes
+     
+     - Parameter block: A Block node to evaluate
+     
+     */
+    private func eval(_ block: Block) {
+        for declaration in block.declarations {
+            self.eval(declaration)
+        }
+        self.eval(block.compound)
+    }
+    
+    /**
+     Evaluates Program nodes
+     
+     - Parameter program: A program node to evaluate
+     
+     */
+    private func eval(_ program: Program) {
+        self.eval(program.block)
+    }
     
     /**
     Interprets initialized text
