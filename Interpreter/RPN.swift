@@ -48,7 +48,12 @@ public class RPN {
      
      */
     private func eval(_ number: Number) -> String {
-        return "\(number.value) "
+        switch number {
+        case .integer(let val):
+            return String(val)
+        case .real(let val):
+            return String(val)
+        }
     }
     
     /**

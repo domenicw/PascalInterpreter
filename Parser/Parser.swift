@@ -61,14 +61,12 @@ public class Parser {
         case .operation(.plus):
             self.eat(.operation(.plus))
             return UnaryOperation(Token.operation(.plus), left: self.factor())
-        case .constant(.integer):
-            let token = self.currentToken
-            self.eat(token)
-            return Number(token)
-        case .constant(.real):
-            let token = self.currentToken
-            self.eat(token)
-            return Number(token)
+        case .constant(.integer(let value)):
+            self.eat(.constant(.integer(value)))
+            return Number.integer(value)
+        case .constant(.real(let value)):
+            self.eat(.constant(.real(value)))
+            return Number.real(value)
         default:
             let variable = self.variable()
             return variable

@@ -24,7 +24,7 @@ class InterpreterTest: XCTestCase {
         let interpreter = Interpreter(program)
         interpreter.interpret()
         let scope = interpreter.globalScope
-        XCTAssertEqual(scope["a"], 2)
+        XCTAssertEqual(scope["a"], Number.integer(2))
     }
     
     func testBigBasicProgram() {
@@ -32,10 +32,10 @@ class InterpreterTest: XCTestCase {
         let interpreter = Interpreter(program)
         interpreter.interpret()
         let scope = interpreter.globalScope
-        XCTAssertEqual(scope["b"], 25)
-        XCTAssertEqual(scope["number"], 2)
-        XCTAssertEqual(scope["a"], 2)
-        XCTAssertEqual(scope["x"], 11)
-        XCTAssertEqual(scope["c"], 27)
+        XCTAssertEqual(scope["b"], Number.real(25))
+        XCTAssertEqual(scope["number"], Number.integer(2))
+        XCTAssertEqual(scope["a"], Number.integer(2))
+        XCTAssertEqual(scope["x"], Number.integer(11))
+        XCTAssertEqual(scope["c"], Number.real(27))
     }
 }

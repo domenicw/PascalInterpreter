@@ -11,7 +11,7 @@ import Foundation
 class Interpreter {
     
     // Globale Scope
-    public private(set) var globalScope: [String: Int]
+    public private(set) var globalScope: [String: Number]
     
     // Parser
     private let parser: Parser
@@ -35,7 +35,7 @@ class Interpreter {
      - Returns: Computed value of tree
      
      */
-    private func eval(_ node: AST) -> Int {
+    private func eval(_ node: AST) -> Number {
         switch node {
         case let operation as BinaryOperation:
             return self.eval(operation)
@@ -62,7 +62,7 @@ class Interpreter {
         default:
             fatalError("Error: unknows node type: \(node)")
         }
-        return 0
+        return .integer(0)
     }
     
     /**
@@ -73,8 +73,8 @@ class Interpreter {
      - Returns: Integer value of Number node
      
      */
-    private func eval(_ number: Number) -> Int {
-        return number.value
+    private func eval(_ number: Number) -> Number {
+        return number
     }
     
     /**
@@ -85,7 +85,7 @@ class Interpreter {
      - Returns: Integer of operation
      
      */
-    private func eval(_ operation: BinaryOperation) -> Int {
+    private func eval(_ operation: BinaryOperation) -> Number {
         switch operation.token {
         case .operation(.minus):
             return eval(operation.left) - eval(operation.right)
@@ -93,7 +93,9 @@ class Interpreter {
             return eval(operation.left) + eval(operation.right)
         case .operation(.mult):
             return eval(operation.left) * eval(operation.right)
-        case .operation(.integerDiv), .operation(.floatDiv):
+        case .operation(.integerDiv):
+            return eval(operation.left) || eval(operation.right)
+        case .operation(.floatDiv):
             return eval(operation.left) / eval(operation.right)
         default:
             fatalError("Error: unknow binary operation type \(operation.token)")
@@ -108,7 +110,7 @@ class Interpreter {
      - Returns: Integer of operation
      
      */
-    private func eval(_ unary: UnaryOperation) -> Int {
+    private func eval(_ unary: UnaryOperation) -> Number {
         switch unary.token {
         case .operation(.minus):
             return -eval(unary.left)
@@ -152,7 +154,7 @@ class Interpreter {
      - Returns: Value for variable
      
      */
-    private func eval(_ variable: Variable) -> Int {
+    private func eval(_ variable: Variable) -> Number {
         let name = variable.name
         if let node = self.globalScope[name] {
             return node

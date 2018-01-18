@@ -8,4 +8,4 @@
 
 import Foundation
 
-public class AST {}
+public protocol AST {}
