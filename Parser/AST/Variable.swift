@@ -13,18 +13,12 @@ public class Variable: AST {
     // Variable Token
     public let token: Token
     // Name of variable
-    public var name: String {
-        get {
-            if case .id(let name) = token {
-                return name
-            }
-            fatalError("Error: token: \(token) is not a variable")
-        }
-    }
+    public let name: String
     
     // Initializer
-    public init(_ token: Token) {
+    public init(_ token: Token, name: String) {
         self.token = token
+        self.name = name
     }
     
 }

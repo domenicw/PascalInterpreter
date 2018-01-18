@@ -43,7 +43,7 @@ public class Parser {
     /**
      Parses factors
      
-     - Note: factor: [ + | - ] INTEGER | [ + | - ] "(" exp ")"
+     - Note: factor: PLUS factor | MINUS factor | INTEGER_CONSTANT | REAL_CONSTANT | "{" expr "}" | variable"
      
      - Returns: Current Integer
      
@@ -65,6 +65,10 @@ public class Parser {
             let token = self.currentToken
             self.eat(token)
             return Number(token)
+        case .constant(.real):
+            let token = self.currentToken
+            self.eat(token)
+            return Number(token)
         default:
             let variable = self.variable()
             return variable
@@ -74,13 +78,13 @@ public class Parser {
     /**
      Parses terms
      
-     - Note: term: factor ((MULT | DIV) factor)*
+     - Note: term: factor ((MULT | INTEGER_DIV | FLOAT_DIV) factor)*
      
      - Returns: Result of terms
      
      */
     private func term() -> AST {
-        let operations: [Token] = [.operation(.mult), .operation(.integerDiv)]
+        let operations: [Token] = [.operation(.mult), .operation(.integerDiv), .operation(.floatDiv)]
         
         var node = self.factor()
         while operations.contains(self.currentToken) {
@@ -89,6 +93,8 @@ public class Parser {
                 self.eat(.operation(.mult))
             } else if token == .operation(.integerDiv) {
                 self.eat(.operation(.integerDiv))
+            } else if token == .operation(.floatDiv) {
+                self.eat(.operation(.floatDiv))
             }
             node = BinaryOperation(token, left: node, right: self.factor())
         }
@@ -128,8 +134,11 @@ public class Parser {
      
      */
     private func variable() -> Variable {
-        let variable = Variable(self.currentToken)
-        self.eat(.id(variable.name))
+        guard case .id(let name) = self.currentToken else {
+            fatalError()
+        }
+        let variable = Variable(self.currentToken, name: name)
+        self.eat(.id(name))
         return variable
     }
     
@@ -206,7 +215,7 @@ public class Parser {
      - Returns: A compound statement
      
      */
-    private func compoundStatement() -> AST {
+    private func compoundStatement() -> Compound {
         self.eat(.begin)
         let statements = self.statementList()
         let compound = Compound(statements)
@@ -215,17 +224,107 @@ public class Parser {
     }
     
     /**
+     Parses declarations
+     
+     - Note: declarations: VAR (variableDeclaration SEMI)+ | empty
+     
+     - Returns: Declarations
+     
+     */
+    private func declarations() -> [VariableDeclaration] {
+        var declarations: [VariableDeclaration] = []
+        if self.currentToken == .variable {
+            self.eat(.variable)
+            while case .id = self.currentToken {
+                declarations += self.variableDeclaration()
+                self.eat(.semi)
+            }
+        }
+        return declarations
+    }
+    
+    /**
+     Parses variable declarations
+     
+     - Note: variableDeclaration: ID (COMMA ID)* COLON variableType
+     
+     - Returns: Variable Declarations
+     
+     */
+    private func variableDeclaration() -> [VariableDeclaration] {
+        guard case .id(let name) = self.currentToken else {
+            fatalError()
+        }
+        var variables = [Variable(self.currentToken, name: name)]
+        self.eat(.id(name))
+        while self.currentToken == .coma {
+            self.eat(.coma)
+            guard case .id(let value) = self.currentToken else {
+                fatalError()
+            }
+            variables.append(Variable(self.currentToken, name: value))
+            self.eat(.id(value))
+        }
+        self.eat(.colon)
+        let type = self.variableType()
+        let declarations = variables.map { (variable) -> VariableDeclaration in
+            return VariableDeclaration(variable, variableType: type)
+        }
+        return declarations
+    }
+    
+    /**
+     Parses variable type
+     
+     - Note: variableType: INTEGER | REAL
+     
+     - Returns: Type of variable
+     
+     */
+    private func variableType() -> VariableType {
+        switch self.currentToken {
+        case .type(.integer):
+            self.eat(.type(.integer))
+            return VariableType(.integer)
+        case .type(.real):
+            self.eat(.type(.real))
+            return VariableType(.real)
+        default:
+            fatalError("Error: \(self.currentToken) is not a data type")
+        }
+    }
+    
+    /**
+     Parses a program block
+     
+     - Note: block: declarations compoundStatement
+     
+     - Returns: A program block
+     
+     */
+    private func block() -> Block {
+        let declarations = self.declarations()
+        let statement = self.compoundStatement()
+        let block = Block(declarations, compound: statement)
+        return block
+    }
+    
+    /**
      Parses program
      
-     - Note: program: compoundStatement DOT
+     - Note: program: PROGRAM variable SEMI block DOT
      
      - Returns: Result AST of program
      
      */
-    private func program() -> AST {
-        let node = self.compoundStatement()
+    private func program() -> Program {
+        self.eat(.program)
+        let variable = self.variable()
+        self.eat(.semi)
+        let block = self.block()
         self.eat(.dot)
-        return node
+        let program = Program(variable.name, block: block)
+        return program
     }
     
     /**
