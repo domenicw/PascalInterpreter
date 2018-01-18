@@ -25,7 +25,7 @@ class ParserTest: XCTestCase {
         let _ = parser.parse()
     }
     
-    func testBigBasic() {
+    func testBigBasicPascal() {
         let program = "BEGIN BEGIN number := 2; a := number; b := 10 * a + 10 * number div 4; c := a - - b END; x := 11; END."
         let parser = Parser(program)
         let _ = parser.parse()

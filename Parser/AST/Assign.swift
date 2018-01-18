@@ -10,10 +10,14 @@ import Foundation
 
 public class Assign: AST {
     
+    // Variable
     public let left: Variable
+    // Right of assign node
     public let right: AST
+    // Token
     public let token: Token
     
+    // Initializer
     public init(_ token: Token, left: Variable, right: AST) {
         self.token = token
         self.left = left

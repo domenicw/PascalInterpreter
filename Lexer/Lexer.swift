@@ -132,7 +132,7 @@ class Lexer {
     }
     
     /**
-     Takes the current character and assigns it to its designated Token
+     Takes the current character (or keyword) and assigns it to its designated Token
      
      - Returns: Token for the current character
      

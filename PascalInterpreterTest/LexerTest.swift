@@ -32,7 +32,7 @@ class LexerTest: XCTestCase {
         XCTAssertEqual(lexer.nextToken(), .eof)
     }
     
-    func testBasicAdvancePascal() {
+    func testBigBasicPascal() {
         let program = "begin { hey tests :) } var x: integer; y : real; begin x := 5; y := x div 2 end end."
         let lexer = Lexer(program)
         XCTAssertEqual(lexer.nextToken(), .begin)

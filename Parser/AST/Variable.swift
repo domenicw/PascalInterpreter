@@ -10,7 +10,9 @@ import Foundation
 
 public class Variable: AST {
     
+    // Variable Token
     public let token: Token
+    // Name of variable
     public var name: String {
         get {
             if case .id(let name) = token {
@@ -20,6 +22,7 @@ public class Variable: AST {
         }
     }
     
+    // Initializer
     public init(_ token: Token) {
         self.token = token
     }

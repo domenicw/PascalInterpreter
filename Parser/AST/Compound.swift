@@ -13,6 +13,7 @@ public class Compound: AST {
     // Compound children
     public var children: [AST] = []
     
+    // Initializer
     public init(_ children: [AST]) {
         self.children = children
     }
