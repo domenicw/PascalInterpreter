@@ -11,8 +11,6 @@
 		B0030CA4200B801300F63A60 /* AST.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF5E200B714A00487609 /* AST.swift */; };
 		B0030CA5200B801500F63A60 /* Number.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF60200B716E00487609 /* Number.swift */; };
 		B0030CA6200B801800F63A60 /* BinaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B061FF62200B72BB00487609 /* BinaryOperation.swift */; };
-		B0030CA8200B96DC00F63A60 /* RPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CA7200B96DC00F63A60 /* RPN.swift */; };
-		B0030CA9200B9A9000F63A60 /* RPN.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CA7200B96DC00F63A60 /* RPN.swift */; };
 		B0030CAB200B9E5800F63A60 /* UnaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */; };
 		B0030CAC200BA08600F63A60 /* UnaryOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */; };
 		B00514D42010B19100C8357B /* VariableDeclaration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00514D32010B19100C8357B /* VariableDeclaration.swift */; };
@@ -23,6 +21,8 @@
 		B00514DC2010B48B00C8357B /* VariableType.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00514D52010B21700C8357B /* VariableType.swift */; };
 		B00514DD2010B48E00C8357B /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00514D72010B2C200C8357B /* Program.swift */; };
 		B00514DE2010B49000C8357B /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00514D92010B36400C8357B /* Block.swift */; };
+		B00514E0201144B400C8357B /* Number+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00514DF201144B400C8357B /* Number+Extensions.swift */; };
+		B00514E1201144DA00C8357B /* Number+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B00514DF201144B400C8357B /* Number+Extensions.swift */; };
 		B03D1811200AB14B000C1951 /* InterpreterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B03D1810200AB14B000C1951 /* InterpreterTest.swift */; };
 		B03D1818200AB7DA000C1951 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D3E200A4902001C46D0 /* Token.swift */; };
 		B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0D95D40200A4924001C46D0 /* Token+Extensions.swift */; };
@@ -64,12 +64,12 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		B0030CA7200B96DC00F63A60 /* RPN.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RPN.swift; sourceTree = "<group>"; };
 		B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnaryOperation.swift; sourceTree = "<group>"; };
 		B00514D32010B19100C8357B /* VariableDeclaration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableDeclaration.swift; sourceTree = "<group>"; };
 		B00514D52010B21700C8357B /* VariableType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VariableType.swift; sourceTree = "<group>"; };
 		B00514D72010B2C200C8357B /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		B00514D92010B36400C8357B /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
+		B00514DF201144B400C8357B /* Number+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extensions.swift"; sourceTree = "<group>"; };
 		B03D180E200AB14B000C1951 /* PascalInterpreterTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PascalInterpreterTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03D1810200AB14B000C1951 /* InterpreterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpreterTest.swift; sourceTree = "<group>"; };
 		B03D1812200AB14B000C1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -175,7 +175,6 @@
 			isa = PBXGroup;
 			children = (
 				B0D95D42200A4C6F001C46D0 /* Interpreter.swift */,
-				B0030CA7200B96DC00F63A60 /* RPN.swift */,
 			);
 			path = Interpreter;
 			sourceTree = "<group>";
@@ -202,6 +201,7 @@
 			children = (
 				B061FF5E200B714A00487609 /* AST.swift */,
 				B061FF60200B716E00487609 /* Number.swift */,
+				B00514DF201144B400C8357B /* Number+Extensions.swift */,
 				B061FF62200B72BB00487609 /* BinaryOperation.swift */,
 				B0030CAA200B9E5800F63A60 /* UnaryOperation.swift */,
 				B0E6E5D3200D46BE00733F04 /* Compound.swift */,
@@ -318,6 +318,7 @@
 				B00514DB2010B48900C8357B /* VariableDeclaration.swift in Sources */,
 				B0E6E5D8200D487A00733F04 /* Assign.swift in Sources */,
 				B0030CAC200BA08600F63A60 /* UnaryOperation.swift in Sources */,
+				B00514E1201144DA00C8357B /* Number+Extensions.swift in Sources */,
 				B00514DD2010B48E00C8357B /* Program.swift in Sources */,
 				B03D1818200AB7DA000C1951 /* Token.swift in Sources */,
 				B03D1819200AB7DC000C1951 /* Token+Extensions.swift in Sources */,
@@ -327,7 +328,6 @@
 				B0E6E5E0200EA87900733F04 /* ParserTest.swift in Sources */,
 				B0E6E5D4200D46BE00733F04 /* Compound.swift in Sources */,
 				B0E6E5DE200D4A2500733F04 /* NoOperation.swift in Sources */,
-				B0030CA9200B9A9000F63A60 /* RPN.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,6 +337,7 @@
 			files = (
 				B061FF61200B716E00487609 /* Number.swift in Sources */,
 				B0D95D43200A4C6F001C46D0 /* Interpreter.swift in Sources */,
+				B00514E0201144B400C8357B /* Number+Extensions.swift in Sources */,
 				B061FF5F200B714A00487609 /* AST.swift in Sources */,
 				B0E6E5CD200D40C700733F04 /* Character.swift in Sources */,
 				B0E6E5D5200D47EE00733F04 /* Compound.swift in Sources */,
@@ -354,7 +355,6 @@
 				B00514D82010B2C200C8357B /* Program.swift in Sources */,
 				B00514DA2010B36400C8357B /* Block.swift in Sources */,
 				B03D181D200B4CCC000C1951 /* Lexer.swift in Sources */,
-				B0030CA8200B96DC00F63A60 /* RPN.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
