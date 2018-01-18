@@ -28,7 +28,7 @@ class Interpreter {
     }
     
     /**
-     Evaluated an AST
+     Evaluates an AST
      
      - Parameter node: a complete tree or a part of it to evaluate
      

@@ -27,6 +27,7 @@ extension Number: Equatable {
 }
 
 extension Number {
+    // Unary minus Number
     public static prefix func -(number: Number) -> Number {
         switch number {
         case let .integer(value):
@@ -36,10 +37,12 @@ extension Number {
         }
     }
     
+    // Unary plus number
     public static prefix func +(number: Number) -> Number {
         return number
     }
     
+    // Plus operation between two Numbers
     public static func +(lhs: Number, rhs: Number) -> Number {
         switch (lhs, rhs) {
         case let (.integer(left), .integer(right)):
@@ -53,6 +56,7 @@ extension Number {
         }
     }
     
+    // Minus operation between two Numbers
     public static func -(lhs: Number, rhs: Number) -> Number {
         switch (lhs, rhs) {
         case let (.integer(left), .integer(right)):
@@ -66,6 +70,7 @@ extension Number {
         }
     }
     
+    // Multiplication operation between two Numbers
     public static func *(lhs: Number, rhs: Number) -> Number {
         switch (lhs, rhs) {
         case let (.integer(left), .integer(right)):
@@ -79,6 +84,7 @@ extension Number {
         }
     }
     
+    // Float division operation between two Numbers
     public static func /(lhs: Number, rhs: Number) -> Number {
         switch (lhs, rhs) {
         case let (.integer(left), .integer(right)):
@@ -92,6 +98,7 @@ extension Number {
         }
     }
     
+    // Integer division operation between two Numbers
     public static func ||(lhs: Number, rhs: Number) -> Number {
         switch (lhs, rhs) {
         case let (.integer(left), .integer(right)):
