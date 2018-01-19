@@ -70,6 +70,7 @@
 		B00514D72010B2C200C8357B /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		B00514D92010B36400C8357B /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		B00514DF201144B400C8357B /* Number+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Number+Extensions.swift"; sourceTree = "<group>"; };
+		B00514E2201293CA00C8357B /* GRAMMAR.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = GRAMMAR.md; sourceTree = "<group>"; };
 		B03D180E200AB14B000C1951 /* PascalInterpreterTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PascalInterpreterTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B03D1810200AB14B000C1951 /* InterpreterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterpreterTest.swift; sourceTree = "<group>"; };
 		B03D1812200AB14B000C1951 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -125,6 +126,7 @@
 		B0D95D26200A4529001C46D0 = {
 			isa = PBXGroup;
 			children = (
+				B00514E2201293CA00C8357B /* GRAMMAR.md */,
 				B0D95D3C200A46B4001C46D0 /* README.md */,
 				B0E6E5CB200D40B600733F04 /* Extension */,
 				B0D95D3D200A48E3001C46D0 /* Token */,
